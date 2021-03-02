@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public interface IUserInteractionsStrategy {
+public interface IUserInterfaceStrategy {
 
     public static int PrintChoices(String[] choices) {
         int choiceID = 1;

@@ -18,17 +18,17 @@ public class RecipeBookApplication {
 
         if (recipesData == null) recipesData = new RecipesData();
 
-        System.out.println(IUserInteractionsStrategy.SurroundString("", 128, '*'));
-        System.out.println(IUserInteractionsStrategy.SurroundString("     Welcome to the Recipe Book!     ", 128, '*'));
-        System.out.println(IUserInteractionsStrategy.SurroundString("", 128, '*'));
+        System.out.println(IUserInterfaceStrategy.SurroundString("", 128, '*'));
+        System.out.println(IUserInterfaceStrategy.SurroundString("     Welcome to the Recipe Book!     ", 128, '*'));
+        System.out.println(IUserInterfaceStrategy.SurroundString("", 128, '*'));
 
-        IUserInteractionsStrategy ingredientsStrategy = new IngredientsDataUserInteractions(in, ingredientsData);
+        IUserInterfaceStrategy ingredientsStrategy = new IngredientsDataUI(in, ingredientsData);
 
         int lastChoice = -1;
         while (true) {
             System.out.println("What would you like to do?");
             System.out.println("");
-            int amountOfChoices = IUserInteractionsStrategy.PrintChoices(ingredientsStrategy.Choices());
+            int amountOfChoices = IUserInterfaceStrategy.PrintChoices(ingredientsStrategy.Choices());
             System.out.println((amountOfChoices + 1) + ". Exit");
             System.out.print("\nPlease enter a number: ");
 
@@ -39,6 +39,7 @@ public class RecipeBookApplication {
             }
         }
 
+        System.out.println("\nHave a nice day!\n");
 
         fileOperations.SaveText(INGREDIENTS_DATA_PATH, ingredientsData.IngredientsToString());
     }

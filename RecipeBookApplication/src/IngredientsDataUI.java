@@ -1,12 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class IngredientsDataUserInteractions implements IUserInteractionsStrategy {
+public class IngredientsDataUI implements IUserInterfaceStrategy {
 
     private Scanner in;
     private IngredientsData ingredientsData;
 
-    public IngredientsDataUserInteractions(Scanner scanner, IngredientsData ingrData) {
+    public IngredientsDataUI(Scanner scanner, IngredientsData ingrData) {
         in = scanner;
         ingredientsData = ingrData;
     }
@@ -22,15 +22,15 @@ public class IngredientsDataUserInteractions implements IUserInteractionsStrateg
     public void MakeChoice(int choice) {
         switch (choice) {
             case 1:
-                System.out.println(IUserInteractionsStrategy.SurroundString(" INGREDIENTS ", 128, '*'));
+                System.out.println(IUserInterfaceStrategy.SurroundString(" INGREDIENTS ", 128, '*'));
                 ArrayList<String> ingredients = ingredientsData.GetAllIngredients();
                 for (String string : ingredients) {
                     System.out.println(string);
                 }
-                System.out.println(IUserInteractionsStrategy.SurroundString("", 128, '*'));
+                System.out.println(IUserInterfaceStrategy.SurroundString("", 128, '*'));
                 break;
             case 2:
-                System.out.println(IUserInteractionsStrategy.SurroundString(" CREATE NEW INGREDIENT ", 128, '*'));
+                System.out.println(IUserInterfaceStrategy.SurroundString(" CREATE NEW INGREDIENT ", 128, '*'));
 
                 System.out.print("Name: ");
                 String name = in.next();
@@ -41,7 +41,7 @@ public class IngredientsDataUserInteractions implements IUserInteractionsStrateg
 
                 Ingredient i = ingredientsData.CreateIngredient(name, price, unit);
 
-                System.out.println(IUserInteractionsStrategy.SurroundString(" A new ingredient was added: " + i.GetDetails() + " ", 128, '*'));
+                System.out.println(IUserInterfaceStrategy.SurroundString(" A new ingredient was added: " + i.GetDetails() + " ", 128, '*'));
                 break;
             case 3:
                 System.out.print("Enter the name of the ingredient you want to delete: ");
