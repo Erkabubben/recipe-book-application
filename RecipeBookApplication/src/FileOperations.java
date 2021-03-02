@@ -14,11 +14,11 @@ public class FileOperations {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    public String LoadFromString() {
+    public String LoadToString(String path) {
         StringBuilder text = new StringBuilder();
 
         try {
-            File file = new File("");
+            File file = new File(path);
             Scanner scan = new Scanner(file);
             while (scan.hasNext()) {
                 String str = scan.nextLine();
@@ -27,6 +27,6 @@ public class FileOperations {
             scan.close();
         } catch (IOException e) { e.printStackTrace(); }
 
-        return "";
+        return text.toString();
     }
 }

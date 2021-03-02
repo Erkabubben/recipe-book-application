@@ -1,0 +1,2 @@
+Carrot;5.0;kg;
+Potato;2.0;kilogram;

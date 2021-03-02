@@ -12,6 +12,6 @@ public class Ingredient {
     }
 
     public String GetDetails() {
-        return name + "(" + price + CURRENCY_SIGN + "/ " + unit + ")"; 
+        return name + " ( " + price + CURRENCY_SIGN + " / " + unit + "(s) )"; 
     }
 }
