@@ -11,12 +11,7 @@ public class IngredientsDataUI extends UserInterface {
     }
 
     public int Main() {
-        System.out.println("INGREDIENTS: What would you like to do?");
-        System.out.println("");
-        int amountOfChoices = PrintChoices();
-        System.out.println((amountOfChoices + 1) + ". Exit");
-        System.out.print("\nPlease enter a number: ");
-
+        DisplayMenu("INGREDIENTS");
         return in.nextInt();
     }
 

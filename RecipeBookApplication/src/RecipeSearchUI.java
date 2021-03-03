@@ -13,12 +13,7 @@ public class RecipeSearchUI extends UserInterface {
     }
 
     public int Main() {
-        System.out.println("SEARCH RECIPES: Please choose a search method.");
-        System.out.println("");
-        int amountOfChoices = PrintChoices();
-        System.out.println((amountOfChoices + 1) + ". Exit");
-        System.out.print("\nPlease enter a number: ");
-
+        DisplayMenu("SEARCH RECIPES");
         return in.nextInt();
     }
 
@@ -45,12 +40,15 @@ public class RecipeSearchUI extends UserInterface {
     private void DisplaySearchResults(ISearchStrategy searchStrategy) {
         ArrayList<Recipe> results = searchStrategy.GetSearchResults(recipesData.GetAllRecipes());
         if (results.size() > 0) {
-            System.out.println("Search Results:");
+            prettyPrints.SurroundPrintln(" Search Results ", '-');
+            System.out.println();
             for (Recipe recipe : results) {
-                System.out.println(recipe.name);
+                prettyPrints.SurroundPrintln(recipe.name, ' ');
             }
+            System.out.println();
+            prettyPrints.SurroundPrintln("", '-');
         } else {
-            System.out.println("The search gave no results.");
+            prettyPrints.SurroundPrintln(" The search gave no results. ", '-');
         }
     }
 }

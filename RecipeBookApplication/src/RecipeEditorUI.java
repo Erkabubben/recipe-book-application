@@ -48,7 +48,7 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private int CreateNewRecipe() {
-        System.out.println("===== CREATE NEW RECIPE =====");
+        prettyPrints.SurroundPrintln(" CREATE NEW RECIPE ", '=');
         EditName();
         if (recipe.name == "") {
             return Choices().length + 1;
@@ -59,7 +59,7 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private int EditRecipe() {
-        System.out.println("===== EDIT RECIPE =====");
+        prettyPrints.SurroundPrintln(" EDIT RECIPE ", '=');
         System.out.println(recipe.GetRecipeAsString(recipe.portions));
         int amountOfChoices = PrintChoices();
         System.out.println((amountOfChoices + 1) + ". Exit");
@@ -80,7 +80,7 @@ public class RecipeEditorUI extends UserInterface {
 
     private void AddIngredients() {
         while (true) {
-            System.out.println("===== ADD INGREDIENT =====");
+            prettyPrints.SurroundPrintln(" ADD INGREDIENT ", '=');
             IngredientsListEntry ingredientsListEntry = CreateIngredientsListEntry();
             if (ingredientsListEntry != null) {
                 recipe.AddIngredientToList(ingredientsListEntry);

@@ -11,10 +11,10 @@ public abstract class UserInterface {
         prettyPrints = pp;
     }
 
-    public int PrintChoices() {
+    protected int PrintChoices() {
         int choiceID = 1;
         for (String string : Choices()) {
-            System.out.println(choiceID + ". " + string);
+            prettyPrints.Println(choiceID + ". " + string);
             choiceID++;
         }
         return Choices().length;
@@ -30,6 +30,14 @@ public abstract class UserInterface {
                 break;
             }
         }
+    }
+
+    protected void DisplayMenu(String title) {
+        prettyPrints.SurroundPrintln(" " + title + " ", '=');
+        System.out.println("");
+        int amountOfChoices = PrintChoices();
+        prettyPrints.Println((amountOfChoices + 1) + ". Exit");
+        System.out.print("\nSelect an option: ");
     }
 
     public abstract int Main();

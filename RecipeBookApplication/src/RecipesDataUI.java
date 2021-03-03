@@ -13,12 +13,7 @@ public class RecipesDataUI extends UserInterface {
     }
 
     public int Main() {
-        System.out.println("RECIPES: What would you like to do?");
-        System.out.println("");
-        int amountOfChoices = PrintChoices();
-        System.out.println((amountOfChoices + 1) + ". Exit");
-        System.out.print("\nPlease enter a number: ");
-
+        DisplayMenu("RECIPES");
         return in.nextInt();
     }
 
@@ -55,24 +50,24 @@ public class RecipesDataUI extends UserInterface {
     }
 
     private void PrintRecipesList() {
-        prettyPrints.SurroundPrintln(" RECIPES ");
+        prettyPrints.SurroundPrintln(" Stored Recipes ", '-');
         ArrayList<String> recipes = recipesData.GetAllRecipeNames();
         for (String string : recipes) {
             System.out.println(string);
         }
-        prettyPrints.SurroundPrintln("");
+        prettyPrints.SurroundPrintln("", '-');
     }
 
     private void CreateNewRecipe() {
-        prettyPrints.SurroundPrintln(" CREATE NEW RECIPE ");
+        prettyPrints.SurroundPrintln(" Create New Recipe ", '-');
         Recipe createRecipe = new Recipe("");
         UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, createRecipe, ingredientsData);
         recipeEditorUI.Enter();
         if (createRecipe.name != "") {
-            prettyPrints.SurroundPrintln(" A new recipe was added: " + createRecipe.name + " ");
+            prettyPrints.SurroundPrintln(" A new recipe was added: " + createRecipe.name + " ", '-');
             recipesData.AddRecipe(createRecipe);
         } else {
-            System.out.println("No new recipe was added.");
+            prettyPrints.SurroundPrintln(" No new recipe was added. ", '-');
         }
     }
 
@@ -98,7 +93,6 @@ public class RecipesDataUI extends UserInterface {
         System.out.print("Enter the name of the recipe you want to delete (leave empty to exit): ");
         in = new Scanner(System.in);
         String recipeName = in.nextLine();
-        //Recipe recipe = recipesData.GetRecipe(recipeName);
         if (recipesData.DeleteRecipe(recipeName)) {
             System.out.println("\"" + recipeName + "\" was deleted from Recipe Book.");
         } else {

@@ -17,6 +17,10 @@ public class PrettyPrints {
         System.out.print(SurroundString(content, size, c));
     }
 
+    public void SurroundPrint(String content, char c) {
+        System.out.print(SurroundString(content, defaultSurroundSize, c));
+    }
+
     public void SurroundPrint(String content) {
         System.out.print(SurroundString(content, defaultSurroundSize, defaultSurroundChar));
     }
@@ -25,7 +29,19 @@ public class PrettyPrints {
         System.out.println(SurroundString(content, size, c));
     }
 
+    public void SurroundPrintln(String content, char c) {
+        System.out.println(SurroundString(content, defaultSurroundSize, c));
+    }
+
     public void SurroundPrintln(String content) {
         System.out.println(SurroundString(content, defaultSurroundSize, defaultSurroundChar));
+    }
+
+    public void Println(String content) {
+        System.out.println(content);
+    }
+
+    public void Print(String content) {
+        System.out.print(content);
     }
 }
