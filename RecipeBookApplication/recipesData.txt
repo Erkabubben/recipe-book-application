@@ -1,2 +1,5 @@
-Buffalo Chicken;2.0;Chicken@6.0@Tasty!@_;______;
-Fish soup;4.0;Fish@8.0@Fry well!@_Chicken@2.0@Fry more!@_;_______;
+Baked Potato;4.0;Potato@4.0@Bake them!@_;__;
+Buffalo Chicken;2.0;Chicken@6.0@Tasty!@_;_____;
+Fish soup;4.0;Fish@8.0@Fry well!@_Chicken@2.0@Fry more!@_;_____;
+Hot Dog;1.0;;__;
+Ravioli;2.0;Potato@2.0@It should be pasta?@_Fish@4.0@Fish in ravioli?@_;_;

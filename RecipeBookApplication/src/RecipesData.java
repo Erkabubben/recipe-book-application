@@ -7,10 +7,15 @@ public class RecipesData {
     private TreeMap<String, Recipe> recipes;
     private IngredientsData ingredientsData;
 
-    private String recipeDelimiter = "\n";
+    private String mainDelimiter = "\n";
     private String delimiter1 = ";";
     private String delimiter2 = "_";
     private String delimiter3 = "@";
+
+    public RecipesData(IngredientsData ingrData) {
+        recipes = new TreeMap<String, Recipe>();
+        ingredientsData = ingrData;
+    }
 
     public ArrayList<Recipe> Search(ISearchStrategy searchStrategies, ArrayList<Recipe> recipes) { return new ArrayList<Recipe>(); }
 
@@ -50,14 +55,14 @@ public class RecipesData {
             }
             s += delimiter1;
 
-            returnString += s + recipeDelimiter;
+            returnString += s + mainDelimiter;
         }
 
         return returnString;
     }
 
     public void StringToRecipes(String inData) {
-        String[] lines = inData.split(recipeDelimiter);    // Split string into lines
+        String[] lines = inData.split(mainDelimiter);    // Split string into lines
         for (String line : lines) {    // Iterate lines
             if (!line.equals("")) {
                 // Parse line into name, portions, ingredients list and instructions list
@@ -82,7 +87,9 @@ public class RecipesData {
                 String[] instructions = elements[3].split(delimiter2, -1);
                 ArrayList<String> instructionsList = new ArrayList<String>();
                 for (String instruction : instructions) {
-                    instructionsList.add(instruction);
+                    if (instruction != null && instruction != "") {
+                        instructionsList.add(instruction);
+                    }
                 }
                 // Create Recipe object and add to RecipeData
                 Recipe r = new Recipe(elements[0], Double.parseDouble(elements[1]), ingredientList, instructionsList);
@@ -91,9 +98,8 @@ public class RecipesData {
         }
     }
 
-    public RecipesData(IngredientsData ingrData) {
-        recipes = new TreeMap<String, Recipe>();
-        ingredientsData = ingrData;
+    public Recipe GetRecipe(String recipeName) {
+        return recipes.get(recipeName);
     }
 
     public void AddRecipe(Recipe recipe) {

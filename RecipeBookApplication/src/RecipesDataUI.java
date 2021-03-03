@@ -24,8 +24,9 @@ public class RecipesDataUI extends UserInterface {
 
     public String[] Choices() {
         return new String[]{
-            "Get All Recipes",
+            "List All Recipes",
             "Create New Recipe",
+            "Edit Recipe",
             "Search Recipes",
             "Delete Recipes"
         };
@@ -34,30 +35,47 @@ public class RecipesDataUI extends UserInterface {
     public void OnChoice(int choice) {
         switch (choice) {
             case 1:
-                prettyPrints.SurroundPrintln(" RECIPES ");
-                ArrayList<String> recipes = recipesData.GetAllRecipes();
-                for (String string : recipes) {
-                    System.out.println(string);
-                }
-                prettyPrints.SurroundPrintln("");
+                PrintRecipesList();
                 break;
             case 2:
-                prettyPrints.SurroundPrintln(" CREATE NEW RECIPE ");
-                Recipe recipe = new Recipe("");
-                UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, recipe, ingredientsData);
-                recipeEditorUI.Enter();
-                if (recipe.name != "") {
-                    prettyPrints.SurroundPrintln(" A new recipe was added: " + recipe.name + " ");
-                    recipesData.AddRecipe(recipe);
-                } else {
-                    System.out.println("No new recipe was added.");
-                }
+                CreateNewRecipe();
                 break;
             case 3:
-
+                EditRecipe();
                 break;
             default:
                 break;
         }
+    }
+
+    private void PrintRecipesList() {
+        prettyPrints.SurroundPrintln(" RECIPES ");
+        ArrayList<String> recipes = recipesData.GetAllRecipes();
+        for (String string : recipes) {
+            System.out.println(string);
+        }
+        prettyPrints.SurroundPrintln("");
+    }
+
+    private void CreateNewRecipe() {
+        prettyPrints.SurroundPrintln(" CREATE NEW RECIPE ");
+        Recipe createRecipe = new Recipe("");
+        UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, createRecipe, ingredientsData);
+        recipeEditorUI.Enter();
+        if (createRecipe.name != "") {
+            prettyPrints.SurroundPrintln(" A new recipe was added: " + createRecipe.name + " ");
+            recipesData.AddRecipe(createRecipe);
+        } else {
+            System.out.println("No new recipe was added.");
+        }
+    }
+
+    private void EditRecipe() {
+        System.out.println("Enter the name of the recipe you want to edit: ");
+        in = new Scanner(System.in);
+        String recipeName = in.nextLine();
+        Recipe editRecipe = recipesData.GetRecipe(recipeName);
+        UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, editRecipe, ingredientsData);
+        recipeEditorUI.Enter();
     }
 }
