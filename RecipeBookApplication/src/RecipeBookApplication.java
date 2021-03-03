@@ -23,22 +23,9 @@ public class RecipeBookApplication {
         prettyPrints.SurroundPrintln("     Welcome to the Recipe Book!     ");
         prettyPrints.SurroundPrintln("");
 
-        UserInterface ingredientsDataUI = new IngredientsDataUI(in, prettyPrints, ingredientsData);
+        UserInterface MainUI = new MainUI(in, prettyPrints, ingredientsData, recipesData);
 
-        int lastChoice = -1;
-        while (true) {
-            System.out.println("What would you like to do?");
-            System.out.println("");
-            int amountOfChoices = UserInterface.PrintChoices(ingredientsDataUI.Choices());
-            System.out.println((amountOfChoices + 1) + ". Exit");
-            System.out.print("\nPlease enter a number: ");
-
-            lastChoice = in.nextInt();
-            ingredientsDataUI.MakeChoice(lastChoice);
-            if (lastChoice == amountOfChoices + 1) {
-                break;
-            }
-        }
+        MainUI.Enter();
 
         System.out.println("\nHave a nice day!\n");
 

@@ -1,17 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class RecipeEditorUI extends UserInterface {
+public class MainUI extends UserInterface {
 
     private IngredientsData ingredientsData;
+    private RecipesData recipesData;
 
-    public RecipeEditorUI(Scanner scanner, PrettyPrints pp, IngredientsData ingrData) {
+    public MainUI(Scanner scanner, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
         super(scanner, pp);
         ingredientsData = ingrData;
+        recipesData = rcpData;
     }
 
     public int Main() {
-        System.out.println("===== RECIPE EDITOR =====");
+        System.out.println("MAIN: What would you like to do?");
         System.out.println("");
         int amountOfChoices = PrintChoices(this);
         System.out.println((amountOfChoices + 1) + ". Exit");
@@ -22,21 +24,20 @@ public class RecipeEditorUI extends UserInterface {
 
     public String[] Choices() {
         return new String[]{
-            "Change Recipe Name",
-            "Add Ingredient To Recipe",
-            "Create New Ingredient And Add To Recipe",
-            "Delete Ingredient From Recipe",
-            "Add Instructions"
+            "Check/Edit Ingredients",
+            "Check/Edit Recipes"
         };
     }
 
     public void OnChoice(int choice) {
         switch (choice) {
             case 1:
+                UserInterface ingredientsDataUI = new IngredientsDataUI(in, prettyPrints, ingredientsData);
+                ingredientsDataUI.Enter();
                 break;
             case 2:
-                break;
-            case 3:
+                UserInterface recipesDataUI = new RecipesDataUI(in, prettyPrints, recipesData, ingredientsData);
+                recipesDataUI.Enter();
                 break;
             default:
                 break;

@@ -1,3 +1,4 @@
 Carrot;5.0;kg;
+Chicken;15.75;kilogram;
 Fish;13.85;piece;
 Potato;2.0;kilogram;

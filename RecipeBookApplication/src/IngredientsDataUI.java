@@ -3,23 +3,21 @@ import java.util.ArrayList;
 
 public class IngredientsDataUI extends UserInterface {
 
-    private Scanner in;
-    private PrettyPrints prettyPrints;
     private IngredientsData ingredientsData;
-    
 
     public IngredientsDataUI(Scanner scanner, PrettyPrints pp, IngredientsData ingrData) {
-        in = scanner;
-        prettyPrints = pp;
+        super(scanner, pp);
         ingredientsData = ingrData;
     }
 
-    public void Before() {
+    public int Main() {
+        System.out.println("INGREDIENTS: What would you like to do?");
+        System.out.println("");
+        int amountOfChoices = PrintChoices(this);
+        System.out.println((amountOfChoices + 1) + ". Exit");
+        System.out.print("\nPlease enter a number: ");
 
-    }
-
-    public void After() {
-        
+        return in.nextInt();
     }
 
     public String[] Choices() {
@@ -30,7 +28,7 @@ public class IngredientsDataUI extends UserInterface {
         };
     }
 
-    public void MakeChoice(int choice) {
+    public void OnChoice(int choice) {
         switch (choice) {
             case 1:
             prettyPrints.SurroundPrintln(" INGREDIENTS ");
