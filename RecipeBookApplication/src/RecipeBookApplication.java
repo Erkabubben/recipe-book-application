@@ -17,7 +17,8 @@ public class RecipeBookApplication {
         ingredientsData = new IngredientsData();
         ingredientsData.StringToIngredients(fileOperations.LoadToString(INGREDIENTS_DATA_PATH));
 
-        if (recipesData == null) recipesData = new RecipesData();
+        recipesData = new RecipesData(ingredientsData);
+        recipesData.StringToRecipes(fileOperations.LoadToString(RECIPES_DATA_PATH));
 
         prettyPrints.SurroundPrintln("");
         prettyPrints.SurroundPrintln("     Welcome to the Recipe Book!     ");
@@ -30,5 +31,6 @@ public class RecipeBookApplication {
         System.out.println("\nHave a nice day!\n");
 
         fileOperations.SaveText(INGREDIENTS_DATA_PATH, ingredientsData.IngredientsToString());
+        fileOperations.SaveText(RECIPES_DATA_PATH, recipesData.RecipesToString());
     }
 }

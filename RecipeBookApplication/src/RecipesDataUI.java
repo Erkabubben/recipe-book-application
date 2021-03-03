@@ -35,16 +35,23 @@ public class RecipesDataUI extends UserInterface {
         switch (choice) {
             case 1:
                 prettyPrints.SurroundPrintln(" RECIPES ");
-                ArrayList<Recipe> recipes = recipesData.GetAllRecipes();
-                for (Recipe recipe : recipes) {
-                    System.out.println(recipe.name);
+                ArrayList<String> recipes = recipesData.GetAllRecipes();
+                for (String string : recipes) {
+                    System.out.println(string);
                 }
                 prettyPrints.SurroundPrintln("");
                 break;
             case 2:
                 prettyPrints.SurroundPrintln(" CREATE NEW RECIPE ");
-                UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, ingredientsData);
+                Recipe recipe = new Recipe("");
+                UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, recipe, ingredientsData);
                 recipeEditorUI.Enter();
+                if (recipe.name != "") {
+                    prettyPrints.SurroundPrintln(" A new recipe was added: " + recipe.name + " ");
+                    recipesData.AddRecipe(recipe);
+                } else {
+                    System.out.println("No new recipe was added.");
+                }
                 break;
             case 3:
 

@@ -49,7 +49,8 @@ public class IngredientsData {
         String[] lines = inData.split("\n");
         for (String line : lines) {
             String[] elements = line.split(";");
-            CreateIngredient(elements[0], Double.parseDouble(elements[1]), elements[2]);
+            Ingredient i = new Ingredient(elements[0], Double.parseDouble(elements[1]), elements[2]);
+            AddIngredient(i);
         }
     }
 
@@ -62,9 +63,11 @@ public class IngredientsData {
         }
     }
 
-    public Ingredient CreateIngredient(String name, double price, String unit) {
-        Ingredient i = new Ingredient(name, price, unit);
-        ingredients.put(name, i);
-        return i;
+    public void AddIngredient(Ingredient i) {
+        ingredients.put(i.name, i);
+    }
+
+    public Ingredient GetIngredient(String ingredientName) {
+        return ingredients.get(ingredientName);
     }
 }

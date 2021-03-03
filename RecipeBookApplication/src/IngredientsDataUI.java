@@ -31,7 +31,7 @@ public class IngredientsDataUI extends UserInterface {
     public void OnChoice(int choice) {
         switch (choice) {
             case 1:
-            prettyPrints.SurroundPrintln(" INGREDIENTS ");
+                prettyPrints.SurroundPrintln(" INGREDIENTS ");
                 ArrayList<String> ingredients = ingredientsData.GetAllIngredients();
                 for (String string : ingredients) {
                     System.out.println(string);
@@ -48,7 +48,8 @@ public class IngredientsDataUI extends UserInterface {
                 System.out.print("Unit: ");
                 String unit = in.next();
 
-                Ingredient i = ingredientsData.CreateIngredient(name, price, unit);
+                Ingredient i = new Ingredient(name, price, unit);
+                ingredientsData.AddIngredient(i);
 
                 prettyPrints.SurroundPrintln(" A new ingredient was added: " + i.GetDetails() + " ");
                 break;
