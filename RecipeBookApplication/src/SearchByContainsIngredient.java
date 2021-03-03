@@ -1,27 +1,29 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SearchByNameBegins implements ISearchStrategy {
+public class SearchByContainsIngredient implements ISearchStrategy {
 
     Scanner in;
 
-    public SearchByNameBegins(Scanner scanner) {
+    public SearchByContainsIngredient(Scanner scanner) {
         in = scanner;
     }
 
     public String RequestSearchParameterFromUser() {
-        System.out.print("Enter recipe name: ");
+        System.out.print("Ingredient to search for: ");
         in = new Scanner(System.in);
-        String recipeName = in.nextLine();
-        return recipeName;
+        String ingredient = in.nextLine();
+        return ingredient;
     }
 
     public ArrayList<Recipe> GetSearchResults (ArrayList<Recipe> listToSearch) {
         String searchParam = RequestSearchParameterFromUser();
         ArrayList<Recipe> results = new ArrayList<Recipe>();
         for (Recipe recipe : listToSearch) {
-            if (recipe.name.startsWith(searchParam)) {
-                results.add(recipe);
+            for (IngredientsListEntry ingredientsListEntry : recipe.ingredients) {
+                if (ingredientsListEntry.ingredient.name.equals(searchParam)) {
+                    results.add(recipe);
+                }
             }
         }
         return results;

@@ -15,7 +15,7 @@ public class RecipesDataUI extends UserInterface {
     public int Main() {
         System.out.println("RECIPES: What would you like to do?");
         System.out.println("");
-        int amountOfChoices = PrintChoices(this);
+        int amountOfChoices = PrintChoices();
         System.out.println((amountOfChoices + 1) + ". Exit");
         System.out.print("\nPlease enter a number: ");
 
@@ -44,6 +44,7 @@ public class RecipesDataUI extends UserInterface {
                 EditRecipe();
                 break;
             case 4:
+                Search();
                 break;
             case 5:
                 DeleteRecipe();
@@ -55,7 +56,7 @@ public class RecipesDataUI extends UserInterface {
 
     private void PrintRecipesList() {
         prettyPrints.SurroundPrintln(" RECIPES ");
-        ArrayList<String> recipes = recipesData.GetAllRecipes();
+        ArrayList<String> recipes = recipesData.GetAllRecipeNames();
         for (String string : recipes) {
             System.out.println(string);
         }
@@ -76,7 +77,7 @@ public class RecipesDataUI extends UserInterface {
     }
 
     private void EditRecipe() {
-        System.out.println("Enter the name of the recipe you want to edit (leave empty to exit): ");
+        System.out.print("Enter the name of the recipe you want to edit (leave empty to exit): ");
         in = new Scanner(System.in);
         String recipeName = in.nextLine();
         Recipe recipe = recipesData.GetRecipe(recipeName);
@@ -88,8 +89,13 @@ public class RecipesDataUI extends UserInterface {
         }
     }
 
+    private void Search() {
+        UserInterface recipeSearchUI = new RecipeSearchUI(in, prettyPrints, recipesData, ingredientsData);
+        recipeSearchUI.Enter();
+    }
+
     private void DeleteRecipe() {
-        System.out.println("Enter the name of the recipe you want to delete (leave empty to exit): ");
+        System.out.print("Enter the name of the recipe you want to delete (leave empty to exit): ");
         in = new Scanner(System.in);
         String recipeName = in.nextLine();
         //Recipe recipe = recipesData.GetRecipe(recipeName);

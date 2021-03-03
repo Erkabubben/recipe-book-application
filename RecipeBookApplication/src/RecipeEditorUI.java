@@ -61,7 +61,7 @@ public class RecipeEditorUI extends UserInterface {
     private int EditRecipe() {
         System.out.println("===== EDIT RECIPE =====");
         System.out.println(recipe.GetRecipeAsString(recipe.portions));
-        int amountOfChoices = PrintChoices(this);
+        int amountOfChoices = PrintChoices();
         System.out.println((amountOfChoices + 1) + ". Exit");
         System.out.print("\nPlease enter a number: ");
         return in.nextInt();

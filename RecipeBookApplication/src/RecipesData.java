@@ -17,10 +17,17 @@ public class RecipesData {
         ingredientsData = ingrData;
     }
 
-    public ArrayList<Recipe> Search(ISearchStrategy searchStrategies, ArrayList<Recipe> recipes) { return new ArrayList<Recipe>(); }
+    public ArrayList<Recipe> GetAllRecipes() {
+        ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+        int id = 1;
+        for (Map.Entry<String, Recipe> entry : recipes.entrySet()) {
+            recipeList.add(entry.getValue());
+            id++;
+        }
+        return recipeList;
+    }
 
-    public ArrayList<String> GetAllRecipes() {
-
+    public ArrayList<String> GetAllRecipeNames() {
         ArrayList<String> recipeStrings = new ArrayList<String>();
         int id = 1;
         for (Map.Entry<String, Recipe> entry : recipes.entrySet()) {
@@ -28,7 +35,6 @@ public class RecipesData {
             recipeStrings.add(s);
             id++;
         }
-
         return recipeStrings;
     }
 
@@ -104,6 +110,11 @@ public class RecipesData {
 
     public void AddRecipe(Recipe recipe) {
         recipes.put(recipe.name, recipe);
+    }
+    
+    public ArrayList<Recipe> Search(ISearchStrategy searchStrategies, ArrayList<Recipe> recipes) {
+
+        return new ArrayList<Recipe>();
     }
 
     public boolean DeleteRecipe(String recipeName) {

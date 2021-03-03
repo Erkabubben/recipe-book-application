@@ -15,7 +15,7 @@ public class MainUI extends UserInterface {
     public int Main() {
         System.out.println("MAIN: What would you like to do?");
         System.out.println("");
-        int amountOfChoices = PrintChoices(this);
+        int amountOfChoices = PrintChoices();
         System.out.println((amountOfChoices + 1) + ". Exit");
         System.out.print("\nPlease enter a number: ");
 

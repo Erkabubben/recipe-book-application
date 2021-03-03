@@ -11,13 +11,13 @@ public abstract class UserInterface {
         prettyPrints = pp;
     }
 
-    public static int PrintChoices(UserInterface ui) {
+    public int PrintChoices() {
         int choiceID = 1;
-        for (String string : ui.Choices()) {
+        for (String string : Choices()) {
             System.out.println(choiceID + ". " + string);
             choiceID++;
         }
-        return ui.Choices().length;
+        return Choices().length;
     }
 
     public void Enter() {
