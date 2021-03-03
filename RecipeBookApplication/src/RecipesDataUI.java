@@ -43,6 +43,11 @@ public class RecipesDataUI extends UserInterface {
             case 3:
                 EditRecipe();
                 break;
+            case 4:
+                break;
+            case 5:
+                DeleteRecipe();
+                break;
             default:
                 break;
         }
@@ -71,11 +76,27 @@ public class RecipesDataUI extends UserInterface {
     }
 
     private void EditRecipe() {
-        System.out.println("Enter the name of the recipe you want to edit: ");
+        System.out.println("Enter the name of the recipe you want to edit (leave empty to exit): ");
         in = new Scanner(System.in);
         String recipeName = in.nextLine();
-        Recipe editRecipe = recipesData.GetRecipe(recipeName);
-        UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, editRecipe, ingredientsData);
-        recipeEditorUI.Enter();
+        Recipe recipe = recipesData.GetRecipe(recipeName);
+        if (recipe != null) {
+            UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, recipe, ingredientsData);
+            recipeEditorUI.Enter();
+        } else {
+            System.out.println("No recipe by name \"" + recipeName + "\" could be found.");
+        }
+    }
+
+    private void DeleteRecipe() {
+        System.out.println("Enter the name of the recipe you want to delete (leave empty to exit): ");
+        in = new Scanner(System.in);
+        String recipeName = in.nextLine();
+        //Recipe recipe = recipesData.GetRecipe(recipeName);
+        if (recipesData.DeleteRecipe(recipeName)) {
+            System.out.println("\"" + recipeName + "\" was deleted from Recipe Book.");
+        } else {
+            System.out.println("No recipe by name \"" + recipeName + "\" could be found.");
+        }
     }
 }

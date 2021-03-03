@@ -31,6 +31,22 @@ public class RecipeEditorUI extends UserInterface {
         };
     }
 
+    public void OnChoice(int choice) {
+        switch (choice) {
+            case 1:
+                EditName();
+                break;
+            case 2:
+                EditPortions();
+                break;
+            case 3:
+                AddIngredients();
+                break;
+            default:
+                break;
+        }
+    }
+
     private int CreateNewRecipe() {
         System.out.println("===== CREATE NEW RECIPE =====");
         EditName();
@@ -44,7 +60,7 @@ public class RecipeEditorUI extends UserInterface {
 
     private int EditRecipe() {
         System.out.println("===== EDIT RECIPE =====");
-        System.out.println("");
+        System.out.println(recipe.GetRecipeAsString(recipe.portions));
         int amountOfChoices = PrintChoices(this);
         System.out.println((amountOfChoices + 1) + ". Exit");
         System.out.print("\nPlease enter a number: ");
@@ -96,20 +112,6 @@ public class RecipeEditorUI extends UserInterface {
                 System.out.println("");
                 return new IngredientsListEntry(ingredient, amount, comment);
             }
-        }
-    }
-
-    public void OnChoice(int choice) {
-        switch (choice) {
-            case 1:
-                EditName();
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            default:
-                break;
         }
     }
 }
