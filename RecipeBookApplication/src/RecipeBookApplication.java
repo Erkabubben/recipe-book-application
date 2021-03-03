@@ -11,6 +11,7 @@ public class RecipeBookApplication {
     public static void main(String[] args) throws Exception {
 
         FileOperations fileOperations = new FileOperations();
+        PrettyPrints prettyPrints = new PrettyPrints();
         Scanner in = new Scanner(System.in);
 
         ingredientsData = new IngredientsData();
@@ -18,22 +19,22 @@ public class RecipeBookApplication {
 
         if (recipesData == null) recipesData = new RecipesData();
 
-        System.out.println(IUserInterfaceStrategy.SurroundString("", 128, '*'));
-        System.out.println(IUserInterfaceStrategy.SurroundString("     Welcome to the Recipe Book!     ", 128, '*'));
-        System.out.println(IUserInterfaceStrategy.SurroundString("", 128, '*'));
+        prettyPrints.SurroundPrintln("");
+        prettyPrints.SurroundPrintln("     Welcome to the Recipe Book!     ");
+        prettyPrints.SurroundPrintln("");
 
-        IUserInterfaceStrategy ingredientsStrategy = new IngredientsDataUI(in, ingredientsData);
+        UserInterface ingredientsDataUI = new IngredientsDataUI(in, prettyPrints, ingredientsData);
 
         int lastChoice = -1;
         while (true) {
             System.out.println("What would you like to do?");
             System.out.println("");
-            int amountOfChoices = IUserInterfaceStrategy.PrintChoices(ingredientsStrategy.Choices());
+            int amountOfChoices = UserInterface.PrintChoices(ingredientsDataUI.Choices());
             System.out.println((amountOfChoices + 1) + ". Exit");
             System.out.print("\nPlease enter a number: ");
 
             lastChoice = in.nextInt();
-            ingredientsStrategy.MakeChoice(lastChoice);
+            ingredientsDataUI.MakeChoice(lastChoice);
             if (lastChoice == amountOfChoices + 1) {
                 break;
             }

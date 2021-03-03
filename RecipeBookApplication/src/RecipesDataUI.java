@@ -1,15 +1,18 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class RecipesDataUI implements IUserInterfaceStrategy {
+public class RecipesDataUI extends UserInterface {
 
     private Scanner in;
+    private PrettyPrints prettyPrints;
     private RecipesData recipesData;
+    private IngredientsData ingredientsData;
 
-    public RecipesDataUI(Scanner scanner, RecipesData rcpData) {
+    public RecipesDataUI(Scanner scanner, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
         in = scanner;
+        prettyPrints = pp;
         recipesData = rcpData;
-        //ingredientsData = ingrData;
+        ingredientsData = ingrData;
     }
 
     public String[] Choices() {
@@ -24,26 +27,17 @@ public class RecipesDataUI implements IUserInterfaceStrategy {
     public void MakeChoice(int choice) {
         switch (choice) {
             case 1:
-                System.out.println(IUserInterfaceStrategy.SurroundString(" RECIPES ", 128, '*'));
+                prettyPrints.SurroundPrintln(" RECIPES ");
                 ArrayList<Recipe> recipes = recipesData.GetAllRecipes();
                 for (Recipe recipe : recipes) {
                     System.out.println(recipe.name);
                 }
-                System.out.println(IUserInterfaceStrategy.SurroundString("", 128, '*'));
+                prettyPrints.SurroundPrintln("");
                 break;
             case 2:
-                /*System.out.println(IUserInterfaceStrategy.SurroundString(" CREATE NEW INGREDIENT ", 128, '*'));
-
-                System.out.print("Name: ");
-                String name = in.next();
-                System.out.print("Price: ");
-                double price = in.nextDouble();
-                System.out.print("Unit: ");
-                String unit = in.next();
-
-                Ingredient i = ingredientsData.CreateIngredient(name, price, unit);
-
-                System.out.println(IUserInterfaceStrategy.SurroundString(" A new ingredient was added: " + i.GetDetails() + " ", 128, '*'));*/
+                prettyPrints.SurroundPrintln(" CREATE NEW RECIPE ");
+                UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, ingredientsData);
+                int amountOfChoices = UserInterface.PrintChoices(recipeEditorUI.Choices());
                 break;
             case 3:
                 /*System.out.print("Enter the name of the ingredient you want to delete: ");

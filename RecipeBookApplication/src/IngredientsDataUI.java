@@ -1,14 +1,25 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class IngredientsDataUI implements IUserInterfaceStrategy {
+public class IngredientsDataUI extends UserInterface {
 
     private Scanner in;
+    private PrettyPrints prettyPrints;
     private IngredientsData ingredientsData;
+    
 
-    public IngredientsDataUI(Scanner scanner, IngredientsData ingrData) {
+    public IngredientsDataUI(Scanner scanner, PrettyPrints pp, IngredientsData ingrData) {
         in = scanner;
+        prettyPrints = pp;
         ingredientsData = ingrData;
+    }
+
+    public void Before() {
+
+    }
+
+    public void After() {
+        
     }
 
     public String[] Choices() {
@@ -22,15 +33,15 @@ public class IngredientsDataUI implements IUserInterfaceStrategy {
     public void MakeChoice(int choice) {
         switch (choice) {
             case 1:
-                System.out.println(IUserInterfaceStrategy.SurroundString(" INGREDIENTS ", 128, '*'));
+            prettyPrints.SurroundPrintln(" INGREDIENTS ");
                 ArrayList<String> ingredients = ingredientsData.GetAllIngredients();
                 for (String string : ingredients) {
                     System.out.println(string);
                 }
-                System.out.println(IUserInterfaceStrategy.SurroundString("", 128, '*'));
+                prettyPrints.SurroundPrintln("");
                 break;
             case 2:
-                System.out.println(IUserInterfaceStrategy.SurroundString(" CREATE NEW INGREDIENT ", 128, '*'));
+                prettyPrints.SurroundPrintln(" CREATE NEW INGREDIENT ");
 
                 System.out.print("Name: ");
                 String name = in.next();
@@ -41,7 +52,7 @@ public class IngredientsDataUI implements IUserInterfaceStrategy {
 
                 Ingredient i = ingredientsData.CreateIngredient(name, price, unit);
 
-                System.out.println(IUserInterfaceStrategy.SurroundString(" A new ingredient was added: " + i.GetDetails() + " ", 128, '*'));
+                prettyPrints.SurroundPrintln(" A new ingredient was added: " + i.GetDetails() + " ");
                 break;
             case 3:
                 System.out.print("Enter the name of the ingredient you want to delete: ");
