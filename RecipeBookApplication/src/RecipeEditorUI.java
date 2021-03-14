@@ -26,8 +26,10 @@ public class RecipeEditorUI extends UserInterface {
             "Change Portions",
             "Add Ingredient To Recipe",
             "Create New Ingredient And Add To Recipe",
-            "Delete Ingredient From Recipe",
-            "Add Instructions"
+            "Delete Ingredients From Recipe",
+            "Add Instructions",
+            "Insert Instruction Line",
+            "Delete Instruction Line"
         };
     }
 
@@ -40,6 +42,15 @@ public class RecipeEditorUI extends UserInterface {
                 EditPortions();
                 break;
             case 3:
+                AddIngredients();
+                break;
+            case 4:
+                AddIngredients();
+                break;
+            case 5:
+                DeleteIngredients();
+                break;
+            case 6:
                 AddIngredients();
                 break;
             default:
@@ -55,6 +66,7 @@ public class RecipeEditorUI extends UserInterface {
         }
         EditPortions();
         AddIngredients();
+        AddInstructions();
         return Choices().length + 1;
     }
 
@@ -89,9 +101,7 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private IngredientsListEntry CreateIngredientsListEntry() {
-        System.out.print("Ingredient (leave empty to exit): ");
-        //in = new Scanner(System.in);
-        String ingredientName = validIn.nextLine();
+        String ingredientName = validIn.nextLine("Ingredient (leave empty to exit): ");
         if (ingredientName == null || ingredientName == "") {
             return null;
         } else {
@@ -107,4 +117,47 @@ public class RecipeEditorUI extends UserInterface {
             }
         }
     }
+
+    private void AddInstructions() {
+        prettyPrints.SurroundPrintln(" ADD INSTRUCTIONS ", '=');
+        while (true) {
+            String instruction = validIn.nextLine("Instruction (leave empty to exit): ");
+            if (instruction != null && instruction != "") {
+                recipe.AddInstructionLine(instruction);
+                System.out.println("\"" + instruction + "\"" + " was added to recipe instructions.");
+            } else {
+                break;
+            }
+        }
+    }
+
+    private void InsertInstructionLine() {
+        prettyPrints.SurroundPrintln(" ADD INSTRUCTIONS ", '=');
+        while (true) {
+            String instruction = validIn.nextLine("Instruction (leave empty to exit): ");
+            if (instruction != null && instruction != "") {
+                recipe.AddInstructionLine(instruction);
+                System.out.println("\"" + instruction + "\"" + " was added to recipe instructions.");
+            } else {
+                break;
+            }
+        }
+    }
+
+    private void DeleteIngredients() {
+        prettyPrints.SurroundPrintln(" DELETE INGREDIENTS ", '=');
+        while (true) {
+            String ingredientName = validIn.nextLine("Ingredient to delete from recipe (leave empty to exit): ");
+            if (ingredientName != null && ingredientName != "") {
+                if (recipe.DeleteIngredientFromList(ingredientName)) {
+                    prettyPrints.Println(ingredientName + " was deleted from recipe.");
+                } else {
+                    prettyPrints.Println(ingredientName + " wasn't found in recipe ingredients list.");
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
 }

@@ -28,33 +28,65 @@ public class Recipe {
     public String GetRecipeAsString(double portionsAmount) {
         String s = name + " (" + portionsAmount + " portions)";
         s += "\n--- Ingredients ---";
+        s += GetIngredientsAsString(portionsAmount);
+        s += "\n--- Instructions ---";
+        s += GetInstructionsAsString();
+        s += "\n----------------------";
+        return s;
+    }
+
+    public String GetIngredientsAsString(double portionsAmount) {
+        String s = "";
         int id = 1;
         for (IngredientsListEntry ingredientsListEntry : ingredients) {
-            s += "\n" + id + ") " + ingredientsListEntry.amount + " " + ingredientsListEntry.ingredient.unit + "(s) of " + ingredientsListEntry.ingredient.name;
+            s += "\n" + id + ") " + (ingredientsListEntry.amount * (portionsAmount / portions)) + " " + ingredientsListEntry.ingredient.unit + "(s) of " + ingredientsListEntry.ingredient.name;
             id++;
         }
-        s += "\n--- Instructions ---";
-        id = 1;
+        return s;
+    }
+
+    public String GetInstructionsAsString() {
+        String s = "";
+        int id = 1;
         for (String instruction : instructions) {
             s += "\n" + id + ") " + instruction;
             id++;
         }
-        s += "\n----------------------";
-        
         return s;
     }
 
-    public double GetTotalPrice(double portionsAmount) { return 0; }
+    public double GetTotalPrice(double portionsAmount) {
+        int total = 0;
+        for (IngredientsListEntry ingredientsListEntry : ingredients) {
+            total += (ingredientsListEntry.ingredient.price * (ingredientsListEntry.amount * portionsAmount / portions)) ;
+        }
+        return total;
+    }
 
     public void AddIngredientToList (IngredientsListEntry ingredient) {
         ingredients.add(ingredient);
     }
 
-    public void DeleteIngredientFromList  (int ingredientListEntryID) {
-
+    public boolean DeleteIngredientFromList (String ingredientName) {
+        for (int i = 0; i < ingredients.size(); i++) {
+            IngredientsListEntry ingredientsListEntry = ingredients.get(i);
+            if (ingredientsListEntry.ingredient.name.equals(ingredientName)) {
+                ingredients.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void InsertInstructionLine(String instructionLine, int atLine) {}
+    public void AddInstructionLine(String instructionLine) {
+        instructions.add(instructionLine); 
+    }
 
-    public void DeleteInstructionLine(int atLine) {}
+    public void AddInstructionLine(String instructionLine, int atLine) {
+        instructions.add(atLine, instructionLine); 
+    }
+
+    public void DeleteInstructionLine(int atLine) {
+
+    }
 }
