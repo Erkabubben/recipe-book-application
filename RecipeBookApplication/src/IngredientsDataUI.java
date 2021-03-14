@@ -12,7 +12,7 @@ public class IngredientsDataUI extends UserInterface {
 
     public int Main() {
         DisplayMenu("INGREDIENTS");
-        return validIn.nextIntInRange(1, amountOfChoices());
+        return DisplayInputRequest();
     }
 
     public String[] Choices() {
@@ -38,8 +38,7 @@ public class IngredientsDataUI extends UserInterface {
 
                 System.out.print("Name: ");
                 String name = validIn.next();
-                System.out.print("Price: ");
-                double price = validIn.nextDouble();
+                double price = validIn.nextDoubleInRange("Price: ", 0, 9999999);
                 System.out.print("Unit: ");
                 String unit = validIn.next();
 

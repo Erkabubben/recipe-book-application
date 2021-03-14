@@ -63,19 +63,15 @@ public class RecipeEditorUI extends UserInterface {
         System.out.println(recipe.GetRecipeAsString(recipe.portions));
         int amountOfChoices = PrintChoices();
         System.out.println((amountOfChoices + 1) + ". Exit");
-        System.out.print("\nPlease enter a number: ");
-        return validIn.nextIntInRange(1, amountOfChoices());
+        return validIn.nextIntInRange("\nPlease enter a number: ", 1, amountOfChoices());
     }
 
     private void EditName() {
-        System.out.print("Name: ");
-        //in = new Scanner(System.in);
-        recipe.name = validIn.nextLine();
+        recipe.name = validIn.nextLine("Name: ");
     }
 
     private void EditPortions() {
-        System.out.print("Portions: ");
-        recipe.portions = validIn.nextDouble();
+        recipe.portions = validIn.nextDoubleInRange("Portions: ", 0, 9999999);
     }
 
     private void AddIngredients() {
@@ -93,7 +89,7 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private IngredientsListEntry CreateIngredientsListEntry() {
-        System.out.print("Ingredient: ");
+        System.out.print("Ingredient (leave empty to exit): ");
         //in = new Scanner(System.in);
         String ingredientName = validIn.nextLine();
         if (ingredientName == null || ingredientName == "") {
@@ -104,11 +100,8 @@ public class RecipeEditorUI extends UserInterface {
                 System.out.println("\nIngredient not found.");
                 return null;
             } else {
-                System.out.print("Amount: ");
-                Double amount = validIn.nextDouble();
-                System.out.print("Comment: ");
-                //in = new Scanner(System.in);
-                String comment = validIn.nextLine();
+                Double amount = validIn.nextDoubleInRange("Amount: ", 0, 9999999);
+                String comment = validIn.nextLine("Comment: ");
                 System.out.println("");
                 return new IngredientsListEntry(ingredient, amount, comment);
             }

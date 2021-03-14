@@ -1,4 +1,11 @@
+Bean;1.0;kg;
 Carrot;5.0;kg;
 Chicken;15.75;kilogram;
+Egg;5.1;piece;
 Fish;13.85;piece;
+Garlic;8.0;piece;
+Onion;6.0;piece;
+Pasta;12.0;kg;
 Potato;2.0;kilogram;
+Radish;3.55;piece;
+Rice;5.1;kg;

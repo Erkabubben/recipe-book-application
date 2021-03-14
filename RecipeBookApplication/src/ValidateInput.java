@@ -14,12 +14,11 @@ public class ValidateInput {
     }
 
     public int nextIntInRange(String prefix, int start, int end) {
-        System.out.print(prefix);
-        return nextIntInRange(start, end);
-    }
-
-    public int nextIntInRange(int start, int end) {
         do {
+            in = new Scanner(System.in);
+            if (prefix != null) {
+                System.out.print(prefix);
+            }
             try {
                 int number = in.nextInt();
                 if (number < start || number > end) {
@@ -29,20 +28,78 @@ public class ValidateInput {
             } catch (IllegalArgumentException e) {
                 System.out.println("ERROR: Input must be within range " + start + " to " + end + ".");
             } catch (InputMismatchException e) {
-                System.out.println("ERROR: Invalid input." + start + " to " + end + ".");
+                System.out.println("ERROR: Invalid input.");
+            } catch (Exception e) {
+                System.out.println("ERROR: Invalid input.");
+            }
+        } while (true);
+    }
+
+    public int nextIntInRange(int start, int end) {
+        return nextIntInRange(null, start, end);
+    }
+
+    public String nextLine(String prefix) {
+        do {
+            in = new Scanner(System.in);
+            if (prefix != null) {
+                System.out.print(prefix);
+            }
+            try {
+                return in.nextLine();
+            } catch (Exception e) {
+                System.out.println("ERROR: Invalid input.");
             }
         } while (true);
     }
 
     public String nextLine() {
-        return in.nextLine();
+        return nextLine(null);
+    }
+
+    public String next(String prefix) {
+        do {
+            in = new Scanner(System.in);
+            if (prefix != null) {
+                System.out.print(prefix);
+            }
+            try {
+                return in.next();
+            } catch (Exception e) {
+                System.out.println("ERROR: Invalid input.");
+            }
+        } while (true);
     }
 
     public String next() {
-        return in.next();
+        return next(null);
     }
 
-    public Double nextDouble() {
-        return in.nextDouble();
+    public Double nextDoubleInRange(String prefix, double start, double end) {
+        do {
+            in = new Scanner(System.in);
+            if (prefix != null) {
+                System.out.print(prefix);
+            }
+            try {
+                String numberString = in.nextLine();
+                numberString = numberString.replace(',', '.');
+                double number = Double.parseDouble(numberString);
+                if (number < start || number > end) {
+                    throw new IllegalArgumentException();
+                }
+                return number;
+            } catch (IllegalArgumentException e) {
+                System.out.println("ERROR: Input must be within range " + start + " to " + end + ".");
+            } catch (InputMismatchException e) {
+                System.out.println("ERROR: Invalid input.");
+            } catch (Exception e) {
+                System.out.println("ERROR: Invalid input.");
+            }
+        } while (true);
+    }
+
+    public Double nextDoubleInRange(double start, double end) {
+        return nextDoubleInRange(null, start, end);
     }
 }

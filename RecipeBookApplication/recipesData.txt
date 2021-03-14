@@ -1,5 +1,5 @@
-Baked Potato;4.0;Potato@4.0@Bake them!@_;____________;
-Buffalo Chicken;2.0;Chicken@6.0@Tasty!@_;_______________;
-Fish soup;4.0;Fish@8.0@Fry well!@_Chicken@2.0@Fry more!@_;_______________;
-Hot Dog;1.0;;____________;
-Ravioli;10.0;Potato@2.0@It should be pasta?@_Fish@4.0@Fish in ravioli?@_;___________;
+Baked Potato;4.0;Potato@4.0@Bake them!@_;____________________;
+Buffalo Chicken;2.0;Chicken@6.0@Tasty!@_;_______________________;
+Fish soup;4.0;Fish@8.0@Fry well!@_Chicken@2.0@Fry more!@_;_______________________;
+Hot Dog;1.0;;____________________;
+Ravioli;10.0;Potato@2.0@It should be pasta?@_Fish@4.0@Fish in ravioli?@_;___________________;

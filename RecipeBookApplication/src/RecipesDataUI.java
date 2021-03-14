@@ -14,7 +14,7 @@ public class RecipesDataUI extends UserInterface {
 
     public int Main() {
         DisplayMenu("RECIPES");
-        return validIn.nextIntInRange(1, amountOfChoices());
+        return DisplayInputRequest();
     }
 
     public String[] Choices() {

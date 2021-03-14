@@ -14,7 +14,7 @@ public class RecipeSearchUI extends UserInterface {
 
     public int Main() {
         DisplayMenu("SEARCH RECIPES");
-        return validIn.nextIntInRange(1, amountOfChoices());
+        return DisplayInputRequest();
     }
 
     public String[] Choices() {

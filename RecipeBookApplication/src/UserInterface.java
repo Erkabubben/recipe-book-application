@@ -37,7 +37,11 @@ public abstract class UserInterface {
         System.out.println("");
         int amountOfChoices = PrintChoices();
         prettyPrints.Println((amountOfChoices + 1) + ". Exit");
-        System.out.print("\nSelect an option: ");
+        prettyPrints.Println("");
+    }
+
+    protected int DisplayInputRequest() {
+        return validIn.nextIntInRange("Select an option: ", 1, amountOfChoices());
     }
 
     protected int amountOfChoices() {
