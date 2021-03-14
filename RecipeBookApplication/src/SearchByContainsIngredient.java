@@ -3,16 +3,16 @@ import java.util.Scanner;
 
 public class SearchByContainsIngredient implements ISearchStrategy {
 
-    Scanner in;
+    ValidateInput validIn;
 
-    public SearchByContainsIngredient(Scanner scanner) {
-        in = scanner;
+    public SearchByContainsIngredient(ValidateInput vi) {
+        validIn = vi;
     }
 
     public String RequestSearchParameterFromUser() {
         System.out.print("Ingredient to search for: ");
-        in = new Scanner(System.in);
-        String ingredient = in.nextLine();
+        //in = new Scanner(System.in);
+        String ingredient = validIn.nextLine();
         return ingredient;
     }
 

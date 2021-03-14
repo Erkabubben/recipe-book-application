@@ -3,11 +3,11 @@ import java.util.ArrayList;
 
 public abstract class UserInterface {
 
-    protected Scanner in;
+    protected ValidateInput validIn;
     protected PrettyPrints prettyPrints;
 
-    public UserInterface(Scanner scanner, PrettyPrints pp) {
-        in = scanner;
+    public UserInterface(ValidateInput vi, PrettyPrints pp) {
+        validIn = vi;
         prettyPrints = pp;
     }
 
@@ -26,7 +26,7 @@ public abstract class UserInterface {
             int amountOfChoices = Choices().length;
             lastChoice = Main();
             OnChoice(lastChoice);
-            if (lastChoice == amountOfChoices + 1 || lastChoice == amountOfChoices + 1) {
+            if (lastChoice == amountOfChoices + 1) {
                 break;
             }
         }
@@ -40,7 +40,11 @@ public abstract class UserInterface {
         System.out.print("\nSelect an option: ");
     }
 
-    public abstract int Main();
-    public abstract String[] Choices();
-    public abstract void OnChoice(int choice);
+    protected int amountOfChoices() {
+        return Choices().length + 1;
+    }
+
+    protected abstract int Main();
+    protected abstract String[] Choices();
+    protected abstract void OnChoice(int choice);
 }

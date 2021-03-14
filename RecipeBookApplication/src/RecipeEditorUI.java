@@ -6,8 +6,8 @@ public class RecipeEditorUI extends UserInterface {
     private IngredientsData ingredientsData;
     private Recipe recipe;
 
-    public RecipeEditorUI(Scanner scanner, PrettyPrints pp, Recipe r, IngredientsData ingrData) {
-        super(scanner, pp);
+    public RecipeEditorUI(ValidateInput vi, PrettyPrints pp, Recipe r, IngredientsData ingrData) {
+        super(vi, pp);
         ingredientsData = ingrData;
         recipe = r;
     }
@@ -64,18 +64,18 @@ public class RecipeEditorUI extends UserInterface {
         int amountOfChoices = PrintChoices();
         System.out.println((amountOfChoices + 1) + ". Exit");
         System.out.print("\nPlease enter a number: ");
-        return in.nextInt();
+        return validIn.nextIntInRange(1, amountOfChoices());
     }
 
     private void EditName() {
         System.out.print("Name: ");
-        in = new Scanner(System.in);
-        recipe.name = in.nextLine();
+        //in = new Scanner(System.in);
+        recipe.name = validIn.nextLine();
     }
 
     private void EditPortions() {
         System.out.print("Portions: ");
-        recipe.portions = in.nextDouble();
+        recipe.portions = validIn.nextDouble();
     }
 
     private void AddIngredients() {
@@ -94,8 +94,8 @@ public class RecipeEditorUI extends UserInterface {
 
     private IngredientsListEntry CreateIngredientsListEntry() {
         System.out.print("Ingredient: ");
-        in = new Scanner(System.in);
-        String ingredientName = in.nextLine();
+        //in = new Scanner(System.in);
+        String ingredientName = validIn.nextLine();
         if (ingredientName == null || ingredientName == "") {
             return null;
         } else {
@@ -105,10 +105,10 @@ public class RecipeEditorUI extends UserInterface {
                 return null;
             } else {
                 System.out.print("Amount: ");
-                Double amount = in.nextDouble();
+                Double amount = validIn.nextDouble();
                 System.out.print("Comment: ");
-                in = new Scanner(System.in);
-                String comment = in.nextLine();
+                //in = new Scanner(System.in);
+                String comment = validIn.nextLine();
                 System.out.println("");
                 return new IngredientsListEntry(ingredient, amount, comment);
             }

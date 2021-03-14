@@ -6,15 +6,15 @@ public class RecipesDataUI extends UserInterface {
     private RecipesData recipesData;
     private IngredientsData ingredientsData;
 
-    public RecipesDataUI(Scanner scanner, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
-        super(scanner, pp);
+    public RecipesDataUI(ValidateInput vi, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
+        super(vi, pp);
         recipesData = rcpData;
         ingredientsData = ingrData;
     }
 
     public int Main() {
         DisplayMenu("RECIPES");
-        return in.nextInt();
+        return validIn.nextIntInRange(1, amountOfChoices());
     }
 
     public String[] Choices() {
@@ -61,7 +61,7 @@ public class RecipesDataUI extends UserInterface {
     private void CreateNewRecipe() {
         prettyPrints.SurroundPrintln(" Create New Recipe ", '-');
         Recipe createRecipe = new Recipe("");
-        UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, createRecipe, ingredientsData);
+        UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, createRecipe, ingredientsData);
         recipeEditorUI.Enter();
         if (createRecipe.name != "") {
             prettyPrints.SurroundPrintln(" A new recipe was added: " + createRecipe.name + " ", '-');
@@ -73,11 +73,11 @@ public class RecipesDataUI extends UserInterface {
 
     private void EditRecipe() {
         System.out.print("Enter the name of the recipe you want to edit (leave empty to exit): ");
-        in = new Scanner(System.in);
-        String recipeName = in.nextLine();
+        //in = new Scanner(System.in);
+        String recipeName = validIn.nextLine();
         Recipe recipe = recipesData.GetRecipe(recipeName);
         if (recipe != null) {
-            UserInterface recipeEditorUI = new RecipeEditorUI(in, prettyPrints, recipe, ingredientsData);
+            UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, recipe, ingredientsData);
             recipeEditorUI.Enter();
         } else {
             System.out.println("No recipe by name \"" + recipeName + "\" could be found.");
@@ -85,14 +85,14 @@ public class RecipesDataUI extends UserInterface {
     }
 
     private void Search() {
-        UserInterface recipeSearchUI = new RecipeSearchUI(in, prettyPrints, recipesData, ingredientsData);
+        UserInterface recipeSearchUI = new RecipeSearchUI(validIn, prettyPrints, recipesData, ingredientsData);
         recipeSearchUI.Enter();
     }
 
     private void DeleteRecipe() {
         System.out.print("Enter the name of the recipe you want to delete (leave empty to exit): ");
-        in = new Scanner(System.in);
-        String recipeName = in.nextLine();
+        //in = new Scanner(System.in);
+        String recipeName = validIn.nextLine();
         if (recipesData.DeleteRecipe(recipeName)) {
             System.out.println("\"" + recipeName + "\" was deleted from Recipe Book.");
         } else {

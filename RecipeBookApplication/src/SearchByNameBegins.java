@@ -3,16 +3,16 @@ import java.util.Scanner;
 
 public class SearchByNameBegins implements ISearchStrategy {
 
-    Scanner in;
+    ValidateInput validIn;
 
-    public SearchByNameBegins(Scanner scanner) {
-        in = scanner;
+    public SearchByNameBegins(ValidateInput vi) {
+        validIn = vi;
     }
 
     public String RequestSearchParameterFromUser() {
         System.out.print("Enter recipe name: ");
-        in = new Scanner(System.in);
-        String recipeName = in.nextLine();
+        //in = new Scanner(System.in);
+        String recipeName = validIn.nextLine();
         return recipeName;
     }
 

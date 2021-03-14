@@ -6,15 +6,15 @@ public class MainUI extends UserInterface {
     private IngredientsData ingredientsData;
     private RecipesData recipesData;
 
-    public MainUI(Scanner scanner, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
-        super(scanner, pp);
+    public MainUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
+        super(vi, pp);
         ingredientsData = ingrData;
         recipesData = rcpData;
     }
 
     public int Main() {
         DisplayMenu("MAIN MENU");
-        return in.nextInt();
+        return validIn.nextIntInRange(1, amountOfChoices());
     }
 
     public String[] Choices() {
@@ -27,11 +27,11 @@ public class MainUI extends UserInterface {
     public void OnChoice(int choice) {
         switch (choice) {
             case 1:
-                UserInterface ingredientsDataUI = new IngredientsDataUI(in, prettyPrints, ingredientsData);
+                UserInterface ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData);
                 ingredientsDataUI.Enter();
                 break;
             case 2:
-                UserInterface recipesDataUI = new RecipesDataUI(in, prettyPrints, recipesData, ingredientsData);
+                UserInterface recipesDataUI = new RecipesDataUI(validIn, prettyPrints, recipesData, ingredientsData);
                 recipesDataUI.Enter();
                 break;
             default:

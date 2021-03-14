@@ -9,7 +9,8 @@ public class RecipeBookApplication {
 
         FileOperations fileOperations = new FileOperations();
         PrettyPrints prettyPrints = new PrettyPrints();
-        Scanner in = new Scanner(System.in);
+        //Scanner in = new Scanner(System.in);
+        ValidateInput validIn = new ValidateInput();
 
         IngredientsData ingredientsData = new IngredientsData();
         ingredientsData.StringToIngredients(fileOperations.LoadToString(INGREDIENTS_DATA_PATH));
@@ -21,7 +22,7 @@ public class RecipeBookApplication {
         prettyPrints.SurroundPrintln("     Welcome to the Recipe Book!     ");
         prettyPrints.SurroundPrintln("");
 
-        UserInterface MainUI = new MainUI(in, prettyPrints, ingredientsData, recipesData);
+        UserInterface MainUI = new MainUI(validIn, prettyPrints, ingredientsData, recipesData);
 
         MainUI.Enter();
 

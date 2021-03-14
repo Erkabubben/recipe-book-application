@@ -6,15 +6,15 @@ public class RecipeSearchUI extends UserInterface {
     private IngredientsData ingredientsData;
     private RecipesData recipesData;
 
-    public RecipeSearchUI(Scanner scanner, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
-        super(scanner, pp);
+    public RecipeSearchUI(ValidateInput vi, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
+        super(vi, pp);
         ingredientsData = ingrData;
         recipesData = rcpData;
     }
 
     public int Main() {
         DisplayMenu("SEARCH RECIPES");
-        return in.nextInt();
+        return validIn.nextIntInRange(1, amountOfChoices());
     }
 
     public String[] Choices() {
@@ -27,10 +27,10 @@ public class RecipeSearchUI extends UserInterface {
     public void OnChoice(int choice) {
         switch (choice) {
             case 1:
-                DisplaySearchResults(new SearchByNameBegins(in));
+                DisplaySearchResults(new SearchByNameBegins(validIn));
                 break;
             case 2:
-                DisplaySearchResults(new SearchByContainsIngredient(in));
+                DisplaySearchResults(new SearchByContainsIngredient(validIn));
                 break;
             default:
                 break;

@@ -3,6 +3,10 @@ public class PrettyPrints {
     public char defaultSurroundChar = '*';
     public int defaultSurroundSize = 128;
 
+    public PrettyPrints() {
+        
+    }
+
     public String SurroundString(String content, int length, char c) {
         StringBuilder text = new StringBuilder();
         for (int i = 0; i < length; i++) {
