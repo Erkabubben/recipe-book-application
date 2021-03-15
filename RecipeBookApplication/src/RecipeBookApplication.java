@@ -9,7 +9,6 @@ public class RecipeBookApplication {
 
         FileOperations fileOperations = new FileOperations();
         PrettyPrints prettyPrints = new PrettyPrints();
-        //Scanner in = new Scanner(System.in);
         ValidateInput validIn = new ValidateInput();
 
         IngredientsData ingredientsData = new IngredientsData();
@@ -28,7 +27,7 @@ public class RecipeBookApplication {
 
         prettyPrints.Println("\nHave a nice day!\n");
 
-        fileOperations.SaveText(INGREDIENTS_DATA_PATH, ingredientsData.IngredientsToString());
-        fileOperations.SaveText(RECIPES_DATA_PATH, recipesData.RecipesToString());
+        fileOperations.SaveTextToFile(INGREDIENTS_DATA_PATH, ingredientsData.IngredientsToString());
+        fileOperations.SaveTextToFile(RECIPES_DATA_PATH, recipesData.RecipesToString());
     }
 }

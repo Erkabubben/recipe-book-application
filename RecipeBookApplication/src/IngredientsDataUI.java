@@ -17,7 +17,7 @@ public class IngredientsDataUI extends UserInterface {
 
     public String[] Choices() {
         return new String[]{
-            "Get All Ingredients",
+            "List All Ingredients",
             "Create New Ingredient",
             "Delete Ingredient"
         };
@@ -34,18 +34,7 @@ public class IngredientsDataUI extends UserInterface {
                 prettyPrints.SurroundPrintln("");
                 break;
             case 2:
-                prettyPrints.SurroundPrintln(" CREATE NEW INGREDIENT ");
-
-                System.out.print("Name: ");
-                String name = validIn.next();
-                double price = validIn.nextDoubleInRange("Price: ", 0, 9999999);
-                System.out.print("Unit: ");
-                String unit = validIn.next();
-
-                Ingredient i = new Ingredient(name, price, unit);
-                ingredientsData.AddIngredient(i);
-
-                prettyPrints.SurroundPrintln(" A new ingredient was added: " + i.GetDetails() + " ");
+                CreateNewIngredient();
                 break;
             case 3:
                 System.out.print("Enter the name of the ingredient you want to delete: ");
@@ -59,6 +48,23 @@ public class IngredientsDataUI extends UserInterface {
                 break;
             default:
                 break;
+        }
+    }
+
+    public Ingredient CreateNewIngredient() {
+        prettyPrints.SurroundPrintln(" CREATE NEW INGREDIENT ");
+        String name = validIn.nextLine("Name: ");
+        if (name == null || name.isBlank()) {
+            prettyPrints.SurroundPrintln(" No new ingredient was created. ");
+            return null;
+        } else {
+            double price = validIn.nextDoubleInRange("Price: ", 0, 9999999);
+            String unit = validIn.next("Unit: ");
+    
+            Ingredient i = new Ingredient(name, price, unit);
+            ingredientsData.AddIngredient(i);
+            prettyPrints.SurroundPrintln(" A new ingredient was created: " + i.GetDetails() + " ");
+            return i;
         }
     }
 }

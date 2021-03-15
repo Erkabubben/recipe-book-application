@@ -21,35 +21,37 @@ public class Recipe {
         instructions = instr;
     }
 
-    public String GetRecipeAsString() {
-        return GetRecipeAsString (portions);
+    public String GetRecipeAsString(PrettyPrints pp) {
+        return GetRecipeAsString(portions, pp);
     }
 
-    public String GetRecipeAsString(double portionsAmount) {
-        String s = name + " (" + portionsAmount + " portions)";
-        s += "\n--- Ingredients ---";
-        s += GetIngredientsAsString(portionsAmount);
-        s += "\n--- Instructions ---";
-        s += GetInstructionsAsString();
-        s += "\n----------------------";
+    public String GetRecipeAsString(double portionsAmount, PrettyPrints pp) {
+        String s = pp.SurroundString(" " + name + " (" + portionsAmount + " portions) ", '¤');
+        s += "\n\n" + pp.SurroundString(" Ingredients (total price: " + GetTotalPrice(portionsAmount) + ") ", '-') + "\n";
+        s += GetIngredientsAsString(portionsAmount, pp);
+        s += "\n\n" + pp.SurroundString(" Instructions ", '-') + "\n";
+        s += GetInstructionsAsString(pp);
+        s += "\n\n" + pp.SurroundString("", '¤');
         return s;
     }
 
-    public String GetIngredientsAsString(double portionsAmount) {
+    public String GetIngredientsAsString(double portionsAmount, PrettyPrints pp) {
         String s = "";
         int id = 1;
         for (IngredientsListEntry ingredientsListEntry : ingredients) {
-            s += "\n" + id + ") " + (ingredientsListEntry.amount * (portionsAmount / portions)) + " " + ingredientsListEntry.ingredient.unit + "(s) of " + ingredientsListEntry.ingredient.name;
+            String ingredientString = (ingredientsListEntry.amount * (portionsAmount / portions)) + " " + ingredientsListEntry.ingredient.unit + "(s) of " + ingredientsListEntry.ingredient.name;
+            s += "\n" + pp.SurroundString(ingredientString, ' ');
             id++;
         }
         return s;
     }
 
-    public String GetInstructionsAsString() {
+    public String GetInstructionsAsString(PrettyPrints pp) {
         String s = "";
         int id = 1;
         for (String instruction : instructions) {
-            s += "\n" + id + ") " + instruction;
+            String instructionString = id + ") " + instruction;
+            s += "\n" + pp.SurroundString(instructionString, ' ');
             id++;
         }
         return s;
@@ -87,6 +89,6 @@ public class Recipe {
     }
 
     public void DeleteInstructionLine(int atLine) {
-
+        instructions.remove(atLine);
     }
 }

@@ -77,7 +77,7 @@ public class RecipesData {
                 String[] ingredients = elements[2].split(delimiter2, -1);
                 ArrayList<IngredientsListEntry> ingredientList = new ArrayList<IngredientsListEntry>();
                 for (String ingredient : ingredients) {
-                    if (ingredient != "") {
+                    if (!ingredient.equals("")) {
                         String[] ingredientsListEntry = ingredient.split(delimiter3, -1);
                         if (ingredientsListEntry.length > 1) {
                             ingredientList.add(new IngredientsListEntry(
@@ -93,7 +93,7 @@ public class RecipesData {
                 String[] instructions = elements[3].split(delimiter2, -1);
                 ArrayList<String> instructionsList = new ArrayList<String>();
                 for (String instruction : instructions) {
-                    if (instruction != null && instruction != "") {
+                    if (instruction != null && !instruction.isBlank()) {
                         instructionsList.add(instruction);
                     }
                 }
@@ -113,7 +113,6 @@ public class RecipesData {
     }
     
     public ArrayList<Recipe> Search(ISearchStrategy searchStrategies, ArrayList<Recipe> recipes) {
-
         return new ArrayList<Recipe>();
     }
 

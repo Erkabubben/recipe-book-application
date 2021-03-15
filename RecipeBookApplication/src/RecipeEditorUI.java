@@ -24,11 +24,10 @@ public class RecipeEditorUI extends UserInterface {
         return new String[]{
             "Change Recipe Name",
             "Change Portions",
-            "Add Ingredient To Recipe",
+            "Add Ingredients To Recipe",
             "Create New Ingredient And Add To Recipe",
             "Delete Ingredients From Recipe",
             "Add Instructions",
-            "Insert Instruction Line",
             "Delete Instruction Line"
         };
     }
@@ -45,13 +44,16 @@ public class RecipeEditorUI extends UserInterface {
                 AddIngredients();
                 break;
             case 4:
-                AddIngredients();
+                CreateNewIngredientAndAddToRecipe();
                 break;
             case 5:
                 DeleteIngredients();
                 break;
             case 6:
-                AddIngredients();
+                AddInstructions();
+                break;
+            case 7:
+                DeleteInstructions();
                 break;
             default:
                 break;
@@ -72,7 +74,7 @@ public class RecipeEditorUI extends UserInterface {
 
     private int EditRecipe() {
         prettyPrints.SurroundPrintln(" EDIT RECIPE ", '=');
-        System.out.println(recipe.GetRecipeAsString(recipe.portions));
+        System.out.println(recipe.GetRecipeAsString(recipe.portions, prettyPrints) + "\n");
         int amountOfChoices = PrintChoices();
         System.out.println((amountOfChoices + 1) + ". Exit");
         return validIn.nextIntInRange("\nPlease enter a number: ", 1, amountOfChoices());
@@ -83,59 +85,63 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private void EditPortions() {
-        recipe.portions = validIn.nextDoubleInRange("Portions: ", 0, 9999999);
+        double newPortions = validIn.nextDoubleInRange("Portions: ", 0, 9999999);
+        boolean adjustIngredients = validIn.YesOrNo("Adjust ingredient amounts to new amount of portions? (Y/N) ");
+        if (adjustIngredients) {
+            //recipe.GetIngredientsAsString(recipe.portions, prettyPrints);
+            for (IngredientsListEntry ingredientsListEntry : recipe.ingredients) {
+                ingredientsListEntry.amount = ingredientsListEntry.amount * (newPortions / recipe.portions);
+            }
+        }
+        recipe.portions = newPortions;
+    }
+
+    private void CreateNewIngredientAndAddToRecipe() {
+        IngredientsDataUI ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData);
+        Ingredient newIngredient = ingredientsDataUI.CreateNewIngredient();
+        if (newIngredient != null) {
+            IngredientsListEntry ingredientsListEntry = CreateIngredientsListEntry(newIngredient);
+            if (ingredientsListEntry != null) {
+                recipe.AddIngredientToList(ingredientsListEntry);
+                System.out.println(ingredientsListEntry.amount + " " + ingredientsListEntry.ingredient.unit + "(s)" + " of " + ingredientsListEntry.ingredient.name
+                + " was added to the ingredients list of the recipe.");
+            }
+        }
     }
 
     private void AddIngredients() {
         while (true) {
+            prettyPrints.Println(recipe.GetIngredientsAsString(recipe.portions, prettyPrints));
             prettyPrints.SurroundPrintln(" ADD INGREDIENT ", '=');
-            IngredientsListEntry ingredientsListEntry = CreateIngredientsListEntry();
-            if (ingredientsListEntry != null) {
-                recipe.AddIngredientToList(ingredientsListEntry);
-                System.out.println(ingredientsListEntry.amount + " " + ingredientsListEntry.ingredient.unit + "(s)" + " of " + ingredientsListEntry.ingredient.name
-                + " was added to ingredients list.");
-            } else {
+            String ingredientName = validIn.nextLine("Ingredient (leave empty to exit): ");
+            if (ingredientName == null || ingredientName.equals("")) {
                 break;
+            } else {
+                Ingredient ingredient = ingredientsData.GetIngredient(ingredientName);
+                if (ingredient == null) {
+                    System.out.println("\nIngredient not found.");
+                } else {
+                    IngredientsListEntry ingredientsListEntry = CreateIngredientsListEntry(ingredient);
+                    recipe.AddIngredientToList(ingredientsListEntry);
+                    System.out.println(ingredientsListEntry.amount + " " + ingredientsListEntry.ingredient.unit + "(s)" + " of " + ingredientsListEntry.ingredient.name
+                    + " was added to ingredients list.");
+                }
             }
         }
     }
 
-    private IngredientsListEntry CreateIngredientsListEntry() {
-        String ingredientName = validIn.nextLine("Ingredient (leave empty to exit): ");
-        if (ingredientName == null || ingredientName == "") {
-            return null;
-        } else {
-            Ingredient ingredient = ingredientsData.GetIngredient(ingredientName);
-            if (ingredient == null) {
-                System.out.println("\nIngredient not found.");
-                return null;
-            } else {
-                Double amount = validIn.nextDoubleInRange("Amount: ", 0, 9999999);
-                String comment = validIn.nextLine("Comment: ");
-                System.out.println("");
-                return new IngredientsListEntry(ingredient, amount, comment);
-            }
-        }
+    private IngredientsListEntry CreateIngredientsListEntry(Ingredient ingredient) {
+        Double amount = validIn.nextDoubleInRange("Amount: ", 0, 9999999);
+        String comment = validIn.nextLine("Comment: ");
+        System.out.println("");
+        return new IngredientsListEntry(ingredient, amount, comment);
     }
 
     private void AddInstructions() {
         prettyPrints.SurroundPrintln(" ADD INSTRUCTIONS ", '=');
         while (true) {
             String instruction = validIn.nextLine("Instruction (leave empty to exit): ");
-            if (instruction != null && instruction != "") {
-                recipe.AddInstructionLine(instruction);
-                System.out.println("\"" + instruction + "\"" + " was added to recipe instructions.");
-            } else {
-                break;
-            }
-        }
-    }
-
-    private void InsertInstructionLine() {
-        prettyPrints.SurroundPrintln(" ADD INSTRUCTIONS ", '=');
-        while (true) {
-            String instruction = validIn.nextLine("Instruction (leave empty to exit): ");
-            if (instruction != null && instruction != "") {
+            if (instruction != null && !instruction.isBlank()) {
                 recipe.AddInstructionLine(instruction);
                 System.out.println("\"" + instruction + "\"" + " was added to recipe instructions.");
             } else {
@@ -148,7 +154,7 @@ public class RecipeEditorUI extends UserInterface {
         prettyPrints.SurroundPrintln(" DELETE INGREDIENTS ", '=');
         while (true) {
             String ingredientName = validIn.nextLine("Ingredient to delete from recipe (leave empty to exit): ");
-            if (ingredientName != null && ingredientName != "") {
+            if (ingredientName != null && !ingredientName.isBlank()) {
                 if (recipe.DeleteIngredientFromList(ingredientName)) {
                     prettyPrints.Println(ingredientName + " was deleted from recipe.");
                 } else {
@@ -160,4 +166,17 @@ public class RecipeEditorUI extends UserInterface {
         }
     }
 
+    private void DeleteInstructions() {
+        prettyPrints.SurroundPrintln(" DELETE INSTRUCTIONS ", '=');
+        do {
+            System.out.println("\n" + recipe.GetInstructionsAsString(prettyPrints) + "\n");
+            int choice = validIn.nextIntInRange("Enter the index of the instruction you want to delete (enter 0 to exit): ", 0, recipe.instructions.size());
+            if (choice == 0) {
+                break;
+            } else {
+                recipe.DeleteInstructionLine(choice - 1);
+                prettyPrints.Println("The instruction was deleted from the recipe.");
+            }
+        } while (true);
+    }
 }

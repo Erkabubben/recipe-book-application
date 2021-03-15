@@ -20,6 +20,7 @@ public class RecipesDataUI extends UserInterface {
     public String[] Choices() {
         return new String[]{
             "List All Recipes",
+            "Show Recipe",
             "Create New Recipe",
             "Edit Recipe",
             "Search Recipes",
@@ -33,15 +34,18 @@ public class RecipesDataUI extends UserInterface {
                 PrintRecipesList();
                 break;
             case 2:
-                CreateNewRecipe();
+                ShowRecipe();
                 break;
             case 3:
-                EditRecipe();
+                CreateNewRecipe();
                 break;
             case 4:
-                Search();
+                EditRecipe();
                 break;
             case 5:
+                Search();
+                break;
+            case 6:
                 DeleteRecipe();
                 break;
             default:
@@ -58,12 +62,25 @@ public class RecipesDataUI extends UserInterface {
         prettyPrints.SurroundPrintln("", '-');
     }
 
+    private void ShowRecipe() {
+        String recipeName = validIn.nextLine("Enter the name of the recipe you want to show (leave empty to exit): ");
+        if (recipeName != null && !recipeName.isBlank()) {
+            Recipe recipe = recipesData.GetRecipe(recipeName);
+            double portions = validIn.nextDoubleInRange("Enter amount of portions (0 to use recipe default): ", 0.0, 9999999);
+            if (portions == 0) {
+                prettyPrints.Println(recipe.GetRecipeAsString(prettyPrints));
+            } else {
+                prettyPrints.Println(recipe.GetRecipeAsString(portions, prettyPrints));
+            }
+        }
+    }
+
     private void CreateNewRecipe() {
         prettyPrints.SurroundPrintln(" Create New Recipe ", '-');
         Recipe createRecipe = new Recipe("");
         UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, createRecipe, ingredientsData);
         recipeEditorUI.Enter();
-        if (createRecipe.name != "") {
+        if (!createRecipe.name.isBlank()) {
             prettyPrints.SurroundPrintln(" A new recipe was added: " + createRecipe.name + " ", '-');
             recipesData.AddRecipe(createRecipe);
         } else {
@@ -73,7 +90,6 @@ public class RecipesDataUI extends UserInterface {
 
     private void EditRecipe() {
         System.out.print("Enter the name of the recipe you want to edit (leave empty to exit): ");
-        //in = new Scanner(System.in);
         String recipeName = validIn.nextLine();
         Recipe recipe = recipesData.GetRecipe(recipeName);
         if (recipe != null) {
@@ -91,7 +107,6 @@ public class RecipesDataUI extends UserInterface {
 
     private void DeleteRecipe() {
         System.out.print("Enter the name of the recipe you want to delete (leave empty to exit): ");
-        //in = new Scanner(System.in);
         String recipeName = validIn.nextLine();
         if (recipesData.DeleteRecipe(recipeName)) {
             System.out.println("\"" + recipeName + "\" was deleted from Recipe Book.");

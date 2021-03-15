@@ -1,5 +1,6 @@
-Baked Potato;4.0;Potato@4.0@Bake them!@_;____________________;
-Buffalo Chicken;2.0;Chicken@6.0@Tasty!@_;_______________________;
-Fish soup;4.0;Fish@8.0@Fry well!@_Chicken@2.0@Fry more!@_;_______________________;
-Hot Dog;1.0;;____________________;
-Ravioli;10.0;Potato@2.0@It should be pasta?@_Fish@4.0@Fish in ravioli?@_;___________________;
+Baked Potato;4.0;Potato@4.0@Bake them!@_;;
+Buffalo Chicken;2.0;Chicken@6.0@Tasty!@_;;
+Fish soup;4.0;Fish@8.0@Fry well!@_Chicken@2.0@Fry more!@_;;
+Hot Dog;1.0;;;
+Ravioli;10.0;Potato@2.0@It should be pasta?@_Fish@4.0@Fish in ravioli?@_;Boil the ravioli_Add salt_Slice the fish_;
+Tacos;8.0;Sour cream@4.0@@_Onion@8.0@Yellow, not red@_;Add minced meat_Add taco sauce_Add lettuce_;

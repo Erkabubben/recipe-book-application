@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class FileOperations {
 
-    public void SaveText(String path, String text) {
+    public void SaveTextToFile(String path, String text) {
         try {
             File outFile = new File(path);
             PrintWriter printer = new PrintWriter(outFile);

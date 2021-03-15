@@ -75,6 +75,25 @@ public class ValidateInput {
         return next(null);
     }
 
+    public boolean YesOrNo(String prefix) {
+        do {
+            in = new Scanner(System.in);
+            if (prefix != null) {
+                System.out.print(prefix);
+            }
+            try {
+                String s = in.next();
+                if (s.toLowerCase().equals("yes") || s.toLowerCase().equals("y")) {
+                    return true;
+                } else if (s.toLowerCase().equals("no") || s.toLowerCase().equals("n")) {
+                    return false;
+                }
+            } catch (Exception e) {
+                System.out.println("ERROR: Invalid input.");
+            }
+        } while (true);
+    }
+
     public Double nextDoubleInRange(String prefix, double start, double end) {
         do {
             in = new Scanner(System.in);
