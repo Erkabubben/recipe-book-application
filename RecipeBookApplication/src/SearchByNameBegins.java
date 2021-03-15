@@ -11,7 +11,6 @@ public class SearchByNameBegins implements ISearchStrategy {
 
     public String RequestSearchParameterFromUser() {
         System.out.print("Enter recipe name: ");
-        //in = new Scanner(System.in);
         String recipeName = validIn.nextLine();
         return recipeName;
     }

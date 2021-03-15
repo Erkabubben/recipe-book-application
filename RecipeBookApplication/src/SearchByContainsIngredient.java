@@ -11,7 +11,6 @@ public class SearchByContainsIngredient implements ISearchStrategy {
 
     public String RequestSearchParameterFromUser() {
         System.out.print("Ingredient to search for: ");
-        //in = new Scanner(System.in);
         String ingredient = validIn.nextLine();
         return ingredient;
     }

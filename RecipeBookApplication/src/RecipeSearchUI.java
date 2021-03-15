@@ -21,6 +21,7 @@ public class RecipeSearchUI extends UserInterface {
         return new String[]{
             "Name Begins With",
             "Contains Ingredient",
+            "Maximum Total Price"
         };
     }
 
@@ -31,6 +32,9 @@ public class RecipeSearchUI extends UserInterface {
                 break;
             case 2:
                 DisplaySearchResults(new SearchByContainsIngredient(validIn));
+                break;
+            case 3:
+                DisplaySearchResults(new SearchByMaxTotalPrice(validIn));
                 break;
             default:
                 break;
