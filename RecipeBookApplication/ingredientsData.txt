@@ -1,13 +1,14 @@
 Bean;1.0;kg;
 Carrot;5.0;kg;
-Chicken;15.75;kilogram;
+Chicken;15.75;kg;
+Chocolate;4.0;bar;
 Cream;6.0;litre;
 Egg;5.1;piece;
 Fish;13.85;piece;
 Garlic;8.0;piece;
 Onion;6.0;piece;
 Pasta;12.0;kg;
-Potato;2.0;kilogram;
+Potato;2.0;kg;
 Radish;3.55;piece;
 Rice;5.1;kg;
 Sour cream;2.0;litre;

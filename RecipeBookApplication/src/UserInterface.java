@@ -1,6 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public abstract class UserInterface {
 
     protected ValidateInput validIn;

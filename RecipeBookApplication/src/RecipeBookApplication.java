@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class RecipeBookApplication {
 
     private static String INGREDIENTS_DATA_PATH = "./ingredientsData.txt";

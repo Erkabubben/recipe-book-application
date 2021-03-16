@@ -1,6 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class MainUI extends UserInterface {
 
     private IngredientsData ingredientsData;

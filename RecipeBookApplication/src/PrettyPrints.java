@@ -3,20 +3,18 @@ public class PrettyPrints {
     public char defaultSurroundChar = '*';
     public int defaultSurroundSize = 128;
 
-    public PrettyPrints() {
-        
-    }
-
-
-
     public String SurroundString(String content, int length, char c) {
         StringBuilder text = new StringBuilder();
         for (int i = 0; i < length; i++) {
             text.append(c);
         }
         int start = (length / 2) - (content.length() / 2);
-        text.replace(start, start + content.length(), content);
-        return text.toString();
+        if (length >= content.length()) {
+            text.replace(start, start + content.length(), content);
+            return text.toString();
+        } else {
+            return content;
+        }
     }
 
     public String SurroundString(String content, char c) {
@@ -32,8 +30,6 @@ public class PrettyPrints {
         for (int i = 0; i < length; i++) {
             if (i < frame.length()) {
                 text.append(frame.charAt(i));
-            //} else if (i > (length - frame.length())) {
-            //    text.append(frame.charAt(frame.length() - (length - i)));
             } else {
                 text.append(' ');
             }

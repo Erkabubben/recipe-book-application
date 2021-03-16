@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class RecipeEditorUI extends UserInterface {
@@ -88,7 +87,6 @@ public class RecipeEditorUI extends UserInterface {
         double newPortions = validIn.nextDoubleInRange("Portions: ", 0, 9999999);
         boolean adjustIngredients = validIn.YesOrNo("Adjust ingredient amounts to new amount of portions? (Y/N) ");
         if (adjustIngredients) {
-            //recipe.GetIngredientsAsString(recipe.portions, prettyPrints);
             for (IngredientsListEntry ingredientsListEntry : recipe.ingredients) {
                 ingredientsListEntry.amount = ingredientsListEntry.amount * (newPortions / recipe.portions);
             }
