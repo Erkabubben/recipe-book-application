@@ -36,6 +36,7 @@ public class IngredientsData {
             s += i.name + ";";
             s += i.price + ";";
             s += i.unit + ";";
+            if (!i.divisible) s += String.valueOf(i.divisible) + ";";
 
             returnString += s + "\n";
         }
@@ -47,7 +48,13 @@ public class IngredientsData {
         String[] lines = inData.split("\n");
         for (String line : lines) {
             String[] elements = line.split(";");
-            Ingredient i = new Ingredient(elements[0], Double.parseDouble(elements[1]), elements[2]);
+            Ingredient i;
+            if (elements.length == 4) {
+                i = new Ingredient(elements[0], Double.parseDouble(elements[1]), elements[2], Boolean.parseBoolean(elements[3]));
+            } else {
+                i = new Ingredient(elements[0], Double.parseDouble(elements[1]), elements[2], true);
+            }
+            
             AddIngredient(i);
         }
     }

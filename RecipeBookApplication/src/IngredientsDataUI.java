@@ -59,8 +59,9 @@ public class IngredientsDataUI extends UserInterface {
         } else {
             double price = validIn.nextDoubleInRange("Price: ", 0, 9999999);
             String unit = validIn.next("Unit: ");
+            Boolean divisible = validIn.YesOrNo("Ingredient can be divided (Y/N): ");
     
-            Ingredient i = new Ingredient(name, price, unit);
+            Ingredient i = new Ingredient(name, price, unit, divisible);
             ingredientsData.AddIngredient(i);
             prettyPrints.SurroundPrintln(" A new ingredient was created: " + i.GetDetails() + " ");
             return i;

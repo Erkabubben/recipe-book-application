@@ -39,7 +39,12 @@ public class Recipe {
         String s = "";
         int id = 1;
         for (IngredientsListEntry ingredientsListEntry : ingredients) {
-            String ingredientString = (ingredientsListEntry.amount * (portionsAmount / portions)) + " " + ingredientsListEntry.ingredient.unit + "(s) of " + ingredientsListEntry.ingredient.name;
+            double ingredientAmount = (ingredientsListEntry.amount * (portionsAmount / portions));
+            // If ingredient is non-divisible, round to the nearest integer above
+            if (!ingredientsListEntry.ingredient.divisible) {
+                ingredientAmount = Math.ceil(ingredientAmount);
+            }
+            String ingredientString = ingredientAmount + " " + ingredientsListEntry.ingredient.unit + "(s) of " + ingredientsListEntry.ingredient.name;
             s += "\n" + pp.SurroundString(ingredientString, ' ');
             id++;
         }

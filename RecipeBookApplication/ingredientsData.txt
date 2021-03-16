@@ -1,7 +1,9 @@
+Bacon;6.55;slice;
 Bean;1.0;kg;
 Carrot;5.0;kg;
 Chicken;15.75;kg;
 Chocolate;4.0;bar;
+Corn;2.0;piece;false;
 Cream;6.0;litre;
 Egg;5.1;piece;
 Fish;13.85;piece;

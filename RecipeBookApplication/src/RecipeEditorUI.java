@@ -85,10 +85,13 @@ public class RecipeEditorUI extends UserInterface {
 
     private void EditPortions() {
         double newPortions = validIn.nextDoubleInRange("Portions: ", 0, 9999999);
-        boolean adjustIngredients = validIn.YesOrNo("Adjust ingredient amounts to new amount of portions? (Y/N) ");
-        if (adjustIngredients) {
-            for (IngredientsListEntry ingredientsListEntry : recipe.ingredients) {
-                ingredientsListEntry.amount = ingredientsListEntry.amount * (newPortions / recipe.portions);
+        // Only ask whether to adjust ingredient amounts if editing a recipe that contains ingredients
+        if (recipe.ingredients.size() > 0) {
+            boolean adjustIngredients = validIn.YesOrNo("Adjust ingredient amounts to new amount of portions? (Y/N) ");
+            if (adjustIngredients) {
+                for (IngredientsListEntry ingredientsListEntry : recipe.ingredients) {
+                    ingredientsListEntry.amount = ingredientsListEntry.amount * (newPortions / recipe.portions);
+                }
             }
         }
         recipe.portions = newPortions;
@@ -129,7 +132,13 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private IngredientsListEntry CreateIngredientsListEntry(Ingredient ingredient) {
-        Double amount = validIn.nextDoubleInRange("Amount: ", 0, 9999999);
+        Double amount;
+        // Ask for different input type depending on whether the ingredient is divisible
+        if (ingredient.divisible) {
+            amount = validIn.nextDoubleInRange("Amount: ", 0, 9999999);
+        } else {
+            amount = Double.valueOf(validIn.nextIntInRange("Amount (must be an even number as ingredient is non-divisible): ", 0, 9999999));
+        }
         String comment = validIn.nextLine("Comment: ");
         System.out.println("");
         return new IngredientsListEntry(ingredient, amount, comment);
