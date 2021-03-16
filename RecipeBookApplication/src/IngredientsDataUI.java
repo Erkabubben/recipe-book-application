@@ -9,12 +9,12 @@ public class IngredientsDataUI extends UserInterface {
         ingredientsData = ingrData;
     }
 
-    public int Main() {
+    protected int Main() {
         DisplayMenu("INGREDIENTS");
         return DisplayInputRequest();
     }
 
-    public String[] Choices() {
+    protected String[] Choices() {
         return new String[]{
             "List All Ingredients",
             "Create New Ingredient",
@@ -22,7 +22,7 @@ public class IngredientsDataUI extends UserInterface {
         };
     }
 
-    public void OnChoice(int choice) {
+    protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
                 prettyPrints.SurroundPrintln(" INGREDIENTS ");
@@ -50,7 +50,7 @@ public class IngredientsDataUI extends UserInterface {
         }
     }
 
-    public Ingredient CreateNewIngredient() {
+    protected Ingredient CreateNewIngredient() {
         prettyPrints.SurroundPrintln(" CREATE NEW INGREDIENT ");
         String name = validIn.nextLine("Name: ");
         if (name == null || name.isBlank()) {

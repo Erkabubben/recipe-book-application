@@ -37,7 +37,7 @@ public class JUnitTests {
     @AfterEach public void TestTeardown() {
         System.out.println("--- done with test " + (count - 1));
     }
-    @Test public void PrettyPrints() {
+    @Test public void PrettyPrintsSurroundString() {
         PrettyPrints pp = new PrettyPrints();
         // Standard use cases
         assertEquals("### PRETTYPRINTS ###", pp.SurroundString(" PRETTYPRINTS ", 20, '#'));

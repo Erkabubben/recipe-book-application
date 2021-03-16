@@ -11,23 +11,23 @@ public class RecipesDataUI extends UserInterface {
         ingredientsData = ingrData;
     }
 
-    public int Main() {
+    protected int Main() {
         DisplayMenu("RECIPES");
         return DisplayInputRequest();
     }
 
-    public String[] Choices() {
+    protected String[] Choices() {
         return new String[]{
             "List All Recipes",
             "Show Recipe",
             "Create New Recipe",
             "Edit Recipe",
             "Search Recipes",
-            "Delete Recipes"
+            "Delete Recipe"
         };
     }
 
-    public void OnChoice(int choice) {
+    protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
                 PrintRecipesList();

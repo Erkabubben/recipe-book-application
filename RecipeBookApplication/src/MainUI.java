@@ -9,19 +9,19 @@ public class MainUI extends UserInterface {
         recipesData = rcpData;
     }
 
-    public int Main() {
+    protected int Main() {
         DisplayMenu("MAIN MENU");
         return DisplayInputRequest();
     }
 
-    public String[] Choices() {
+    protected String[] Choices() {
         return new String[]{
             "Check/Edit Ingredients",
             "Check/Edit Recipes"
         };
     }
 
-    public void OnChoice(int choice) {
+    protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
                 UserInterface ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData);

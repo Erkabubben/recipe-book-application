@@ -11,7 +11,7 @@ public class RecipeEditorUI extends UserInterface {
         recipe = r;
     }
 
-    public int Main() {
+    protected int Main() {
         if (recipe.name == "") {
             return CreateNewRecipe();
         } else {
@@ -19,7 +19,7 @@ public class RecipeEditorUI extends UserInterface {
         }
     }
 
-    public String[] Choices() {
+    protected String[] Choices() {
         return new String[]{
             "Change Recipe Name",
             "Change Portions",
@@ -31,7 +31,7 @@ public class RecipeEditorUI extends UserInterface {
         };
     }
 
-    public void OnChoice(int choice) {
+    protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
                 EditName();

@@ -11,12 +11,12 @@ public class RecipeSearchUI extends UserInterface {
         recipesData = rcpData;
     }
 
-    public int Main() {
+    protected int Main() {
         DisplayMenu("SEARCH RECIPES");
         return DisplayInputRequest();
     }
 
-    public String[] Choices() {
+    protected String[] Choices() {
         return new String[]{
             "Name Begins With",
             "Contains Ingredient",
@@ -24,7 +24,7 @@ public class RecipeSearchUI extends UserInterface {
         };
     }
 
-    public void OnChoice(int choice) {
+    protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
                 DisplaySearchResults(new SearchByNameBegins(validIn));
