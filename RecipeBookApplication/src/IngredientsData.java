@@ -21,7 +21,7 @@ public class IngredientsData {
         ingredients = new TreeMap<String, Ingredient>();
     }
 
-    /* Returns a list of all ingredients along with their details */
+    /* Returns a list of all ingredients along with their details to be displayed to the user */
     public ArrayList<String> GetListOfAllIngredients() {
 
         ArrayList<String> ingredientStrings = new ArrayList<String>();
@@ -34,7 +34,7 @@ public class IngredientsData {
         return ingredientStrings;
     }
 
-    /* Serializes the contents of IngredientsData to a text string */
+    /* Serializes the contents of the ingredients collection to a text string */
     public String IngredientsToString() {
 
         String returnString = "";
@@ -55,7 +55,7 @@ public class IngredientsData {
         return returnString;
     }
 
-    /* Deserializes the contents of a string saved by IngredientsToString and adds the data as ingredients */
+    /* Deserializes the contents of a string saved by IngredientsToString and adds the data to the ingredients collection */
     public void StringToIngredients(String inData) {
         String[] lines = inData.split("\n");
         for (String line : lines) {

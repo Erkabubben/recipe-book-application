@@ -25,6 +25,7 @@ public class ValidateInput {
         in = new Scanner(System.in);
     }
 
+    /* Requests the user to input an integer within the given range. */
     public int nextIntInRange(String prefix, int start, int end) {
         do {
             in = new Scanner(System.in);
@@ -51,6 +52,7 @@ public class ValidateInput {
         return nextIntInRange(null, start, end);
     }
 
+    /* Requests the user to input a line of text. */
     public String nextLine(String prefix) {
         do {
             in = new Scanner(System.in);
@@ -69,6 +71,7 @@ public class ValidateInput {
         return nextLine(null);
     }
 
+    /* Requests the user to input a text token. */
     public String next(String prefix) {
         do {
             in = new Scanner(System.in);
@@ -87,6 +90,7 @@ public class ValidateInput {
         return next(null);
     }
 
+    /* Requests the user to make a binary decision of 'yes' or 'no' and returns a boolean based on the choice. */
     public boolean YesOrNo(String prefix) {
         do {
             in = new Scanner(System.in);
@@ -106,6 +110,8 @@ public class ValidateInput {
         } while (true);
     }
 
+    /* Requests the user to input a double within the given range - allows for use of either commas or
+       periods as decimal sign. */
     public Double nextDoubleInRange(String prefix, double start, double end) {
         do {
             in = new Scanner(System.in);

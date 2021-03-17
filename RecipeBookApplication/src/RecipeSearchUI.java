@@ -49,6 +49,7 @@ public class RecipeSearchUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface of the selected search strategy, then prints the results. */
     private void DisplaySearchResults(ISearchStrategy searchStrategy) {
         ArrayList<Recipe> results = searchStrategy.GetSearchResults(recipesData.GetAllRecipes());
         if (results.size() > 0) {

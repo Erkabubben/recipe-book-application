@@ -31,11 +31,11 @@ public class MainUI extends UserInterface {
     /* Contains a Switch statement that will trigger code based on what menu option the user has selected */
     protected void OnChoice(int choice) {
         switch (choice) {
-            case 1:
+            case 1: // Displays the user interface for interacting with the IngredientsData.
                 UserInterface ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData, recipesData);
                 ingredientsDataUI.Enter();
                 break;
-            case 2:
+            case 2: // Displays the user interface for interacting with the RecipesData.
                 UserInterface recipesDataUI = new RecipesDataUI(validIn, prettyPrints, recipesData, ingredientsData);
                 recipesDataUI.Enter();
                 break;

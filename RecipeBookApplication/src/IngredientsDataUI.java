@@ -49,6 +49,7 @@ public class IngredientsDataUI extends UserInterface {
         }
     }
 
+    /* Prints a list of all ingredients in IngredientsData */
     private void ListAllIngredients() {
         prettyPrints.SurroundPrintln(" INGREDIENTS ");
         ArrayList<String> ingredients = ingredientsData.GetListOfAllIngredients();
@@ -58,6 +59,7 @@ public class IngredientsDataUI extends UserInterface {
         prettyPrints.SurroundPrintln("");
     }
 
+    /* Displays the user interface for creating a new ingredient. */
     protected Ingredient CreateNewIngredient() {
         prettyPrints.SurroundPrintln(" CREATE NEW INGREDIENT ");
         String name = validIn.nextLine("Name: ");
@@ -76,6 +78,9 @@ public class IngredientsDataUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for deleting an ingredient from the ingredients collection. If recipes
+       contain the ingredient, the user will be given the option to either abort or let the ingredient
+       be deleted from the recipes. */
     private void DeleteIngredient() {
         String ingredientName = validIn.nextLine("Enter the name of the ingredient you want to delete: ");
         if (ingredientName != null && !ingredientName.isBlank()) {

@@ -28,6 +28,7 @@ public class RecipesData {
         ingredientsData = ingrData;
     }
 
+    /* Returns an alphabetically ordered ArrayList list containing all recipes in the recipes collection. */
     public ArrayList<Recipe> GetAllRecipes() {
         ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
         for (Map.Entry<String, Recipe> entry : recipes.entrySet()) {
@@ -36,6 +37,7 @@ public class RecipesData {
         return recipeList;
     }
 
+    /* Returns an ArrayList with the names of all recipes. */
     public ArrayList<String> GetAllRecipeNames() {
         ArrayList<String> recipeStrings = new ArrayList<String>();
         for (Map.Entry<String, Recipe> entry : recipes.entrySet()) {
@@ -45,6 +47,7 @@ public class RecipesData {
         return recipeStrings;
     }
 
+    /* Serializes the contents of the recipes collection to a text string. */
     public String RecipesToString() {
 
         String returnString = "";
@@ -74,9 +77,10 @@ public class RecipesData {
         return returnString;
     }
 
+    /* Deserializes the contents of a string saved by RecipesToString and adds the data to the recipes collection. */
     public void StringToRecipes(String inData) {
-        String[] lines = inData.split(mainDelimiter);    // Split string into lines
-        for (String line : lines) {    // Iterate lines
+        String[] lines = inData.split(mainDelimiter); // Split string into lines
+        for (String line : lines) { // Iterate lines
             if (!line.equals("")) {
                 // Parse line into name, portions, ingredients list and instructions list
                 String[] elements = line.split(delimiter1, -1);
@@ -104,25 +108,31 @@ public class RecipesData {
                         instructionsList.add(instruction);
                     }
                 }
-                // Create Recipe object and add to RecipeData
+                // Create Recipe object and add to recipes collection
                 Recipe r = new Recipe(elements[0], Double.parseDouble(elements[1]), ingredientList, instructionsList);
                 AddRecipe(r);
             }
         }
     }
 
+    /* Returns a recipe from the recipes collection. */
     public Recipe GetRecipe(String recipeName) {
         return recipes.get(recipeName);
     }
 
+    /* Adds a recipe to the recipes collection. */
     public void AddRecipe(Recipe recipe) {
         recipes.put(recipe.name, recipe);
     }
     
-    public ArrayList<Recipe> Search(ISearchStrategy searchStrategies, ArrayList<Recipe> recipes) {
+    /* Performs a search on the recipes collection - returns an ArrayList containing the recipes
+       that match the criteria of the given search strategy. */
+    public ArrayList<Recipe> Search(ISearchStrategy searchStrategy, ArrayList<Recipe> recipes) {
         return new ArrayList<Recipe>();
     }
 
+    /* Deletes the recipe matching the given name, if one is found in the recipes collection.
+       Returns true if successful and false otherwise. */
     public boolean DeleteRecipe(String recipeName) {
         if (recipes.containsKey(recipeName)) {
             recipes.remove(recipeName);

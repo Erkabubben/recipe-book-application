@@ -42,7 +42,7 @@ public class RecipeEditorUI extends UserInterface {
     protected String[] Choices() {
         return new String[]{
             "Change Recipe Name",
-            "Change Portions",
+            "Change Default Portions Amount",
             "Add Ingredients To Recipe",
             "Create New Ingredient And Add To Recipe",
             "Delete Ingredients From Recipe",
@@ -55,10 +55,10 @@ public class RecipeEditorUI extends UserInterface {
     protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
-                EditName();
+                SetName();
                 break;
             case 2:
-                EditPortions();
+                SetPortions();
                 break;
             case 3:
                 AddIngredients();
@@ -80,25 +80,28 @@ public class RecipeEditorUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for creating a new recipe. */
     private int CreateNewRecipe() {
         prettyPrints.SurroundPrintln(" Create New Recipe ", '=');
-        EditName();
+        SetName();
         if (recipe.name == "") {
             return Choices().length + 1;
         }
-        EditPortions();
+        SetPortions();
         AddIngredients();
         AddInstructions();
         return Choices().length + 1;
     }
 
-    private void EditName() {
+    /* Displays the user interface for setting the recipe name. */
+    private void SetName() {
         recipe.name = validIn.nextLine("Name: ");
     }
 
-    private void EditPortions() {
+    /* Displays the user interface for setting default portions amount. */
+    private void SetPortions() {
         double newPortions = validIn.nextDoubleInRange("Portions: ", 0, 9999999);
-        // Only ask whether to adjust ingredient amounts if editing a recipe that contains ingredients
+        // Only ask whether to adjust ingredient amounts if editing a recipe that contains ingredients.
         if (recipe.ingredients.size() > 0) {
             boolean adjustIngredients = validIn.YesOrNo("Adjust ingredient amounts to new amount of portions? (Y/N) ");
             if (adjustIngredients) {
@@ -110,6 +113,8 @@ public class RecipeEditorUI extends UserInterface {
         recipe.portions = newPortions;
     }
 
+    /* Displays the user interface for creating a new ingredient and adding it both to the IngredientsData and to the recipe.
+       Uses the CreateNewIngredient method of the IngredientsDataUI. */
     private void CreateNewIngredientAndAddToRecipe() {
         IngredientsDataUI ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData, recipesData);
         Ingredient newIngredient = ingredientsDataUI.CreateNewIngredient();
@@ -123,6 +128,7 @@ public class RecipeEditorUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for adding ingredients to the recipe. */
     private void AddIngredients() {
         while (true) {
             prettyPrints.Println(recipe.GetIngredientsListAsString(recipe.portions, prettyPrints));
@@ -144,6 +150,7 @@ public class RecipeEditorUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for creating a new ingredients list entry. */
     private IngredientsListEntry CreateIngredientsListEntry(Ingredient ingredient) {
         Double amount;
         // Ask for different input type depending on whether the ingredient is divisible
@@ -157,6 +164,7 @@ public class RecipeEditorUI extends UserInterface {
         return new IngredientsListEntry(ingredient, amount, comment);
     }
 
+    /* Displays the user interface for adding instructions to the recipe. */
     private void AddInstructions() {
         prettyPrints.SurroundPrintln(" ADD INSTRUCTIONS ", '=');
         while (true) {
@@ -170,6 +178,7 @@ public class RecipeEditorUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for deleting entries from the ingredients list of the recipe. */
     private void DeleteIngredients() {
         prettyPrints.SurroundPrintln(" DELETE INGREDIENTS ", '=');
         while (true) {
@@ -204,6 +213,7 @@ public class RecipeEditorUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for deleting instructions from the recipe. */
     private void DeleteInstructions() {
         prettyPrints.SurroundPrintln(" DELETE INSTRUCTIONS ", '=');
         do {

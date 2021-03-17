@@ -61,6 +61,7 @@ public class RecipesDataUI extends UserInterface {
         }
     }
 
+    /* Prints a list of all recipes in RecipesData */
     private void PrintRecipesList() {
         prettyPrints.SurroundPrintln(" Stored Recipes ", '-');
         ArrayList<String> recipes = recipesData.GetAllRecipeNames();
@@ -70,6 +71,7 @@ public class RecipesDataUI extends UserInterface {
         prettyPrints.SurroundPrintln("", '-');
     }
 
+    /* Displays the user interface for printing a recipe to the console */
     private void ShowRecipe() {
         String recipeName = validIn.nextLine("Enter the name of the recipe you want to show (leave empty to exit): ");
         if (recipeName != null && !recipeName.isBlank()) {
@@ -83,6 +85,7 @@ public class RecipesDataUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for creating a new recipe - enters the RecipeEditorUI. */
     private void CreateNewRecipe() {
         prettyPrints.SurroundPrintln(" Create New Recipe ", '-');
         Recipe createRecipe = new Recipe("");
@@ -96,6 +99,7 @@ public class RecipesDataUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for editing a recipe - enters the RecipeEditorUI. */
     private void EditRecipe() {
         System.out.print("Enter the name of the recipe you want to edit (leave empty to exit): ");
         String recipeName = validIn.nextLine();
@@ -108,11 +112,13 @@ public class RecipesDataUI extends UserInterface {
         }
     }
 
+    /* Displays the user interface for making a recipe search - enters the RecipeSearchUI. */
     private void Search() {
         UserInterface recipeSearchUI = new RecipeSearchUI(validIn, prettyPrints, recipesData);
         recipeSearchUI.Enter();
     }
 
+    /* Displays the user interface for deleting a recipe. */
     private void DeleteRecipe() {
         System.out.print("Enter the name of the recipe you want to delete (leave empty to exit): ");
         String recipeName = validIn.nextLine();
