@@ -39,13 +39,7 @@ public class Recipe {
         String s = "";
         int id = 1;
         for (IngredientsListEntry ingredientsListEntry : ingredients) {
-            double ingredientAmount = (ingredientsListEntry.amount * (portionsAmount / portions));
-            // If ingredient is non-divisible, round to the nearest integer above
-            if (!ingredientsListEntry.ingredient.divisible) {
-                ingredientAmount = Math.ceil(ingredientAmount);
-            }
-            String ingredientString = ingredientAmount + " " + ingredientsListEntry.ingredient.unit + "(s) of " + ingredientsListEntry.ingredient.name;
-            s += "\n" + pp.SurroundString(ingredientString, ' ');
+            s += "\n" + pp.SurroundString(ingredientsListEntry.GetDetails(portionsAmount / portions), ' ');
             id++;
         }
         return s;
@@ -74,15 +68,19 @@ public class Recipe {
         ingredients.add(ingredient);
     }
 
-    public boolean DeleteIngredientFromList (String ingredientName) {
+    public ArrayList<Integer> FindIngredientsInList(String ingredientName) {
+        ArrayList<Integer> results = new ArrayList<Integer>();
         for (int i = 0; i < ingredients.size(); i++) {
             IngredientsListEntry ingredientsListEntry = ingredients.get(i);
             if (ingredientsListEntry.ingredient.name.equals(ingredientName)) {
-                ingredients.remove(i);
-                return true;
+                results.add(i);
             }
         }
-        return false;
+        return results;
+    }
+
+    public void DeleteIngredientFromList (int index) {
+        ingredients.remove(index);
     }
 
     public void AddInstructionLine(String instructionLine) {

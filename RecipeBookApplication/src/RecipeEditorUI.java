@@ -162,10 +162,28 @@ public class RecipeEditorUI extends UserInterface {
         while (true) {
             String ingredientName = validIn.nextLine("Ingredient to delete from recipe (leave empty to exit): ");
             if (ingredientName != null && !ingredientName.isBlank()) {
-                if (recipe.DeleteIngredientFromList(ingredientName)) {
+                ArrayList<Integer> ingredientsFound = recipe.FindIngredientsInList(ingredientName);
+                if (ingredientsFound.size() == 0) {
+                    prettyPrints.Println(ingredientName + " wasn't found in recipe ingredients list.");
+                } else if (ingredientsFound.size() == 1) {
+                    recipe.DeleteIngredientFromList(ingredientsFound.get(0));
                     prettyPrints.Println(ingredientName + " was deleted from recipe.");
                 } else {
-                    prettyPrints.Println(ingredientName + " wasn't found in recipe ingredients list.");
+                    prettyPrints.Println("Which ingredients list entry do you want to delete?\n");
+                    int choiceID = 1;
+                    for (int i : ingredientsFound) {
+                        prettyPrints.Println(choiceID + ". " + recipe.ingredients.get(i).GetDetails());
+                        choiceID++;
+                    }
+                    prettyPrints.Println(choiceID + ". Exit");
+                    prettyPrints.Println("");
+                    int ingredientToDeleteID = validIn.nextIntInRange("Select an option: ", 1, ingredientsFound.size() + 1);
+                    if (ingredientToDeleteID == ingredientsFound.size() + 1) {
+                        break;
+                    } else {
+                        recipe.DeleteIngredientFromList(ingredientsFound.get(ingredientToDeleteID - 1));
+                        prettyPrints.Println(ingredientName + " was deleted from recipe.");
+                    }
                 }
             } else {
                 break;

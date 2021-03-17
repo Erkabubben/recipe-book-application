@@ -13,4 +13,5 @@ Pasta;12.0;kg;
 Potato;2.0;kg;
 Radish;3.55;piece;
 Rice;5.1;kg;
+Sausage;0.55;piece;false;
 Sour cream;2.0;litre;
