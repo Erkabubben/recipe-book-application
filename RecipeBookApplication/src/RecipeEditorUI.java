@@ -29,7 +29,7 @@ public class RecipeEditorUI extends UserInterface {
         if (recipe.name == "") { // If recipe has no name, go directly to CreateNewRecipe
             return CreateNewRecipe();
         } else { // Otherwise, display menu for editing existing recipe
-            System.out.println(recipe.GetRecipeAsString(recipe.portions, prettyPrints) + "\n");
+            System.out.println(recipe.GetRecipeAsString(recipe.portions, prettyPrints, ingredientsData.CURRENCY) + "\n");
             DisplayMenuWithTitleAndOptions(Title());
             return validIn.nextIntInRange("Select an option: ", 1, amountOfChoices());
         }

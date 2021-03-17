@@ -73,7 +73,7 @@ public class IngredientsDataUI extends UserInterface {
     
             Ingredient i = new Ingredient(name, price, unit, divisible);
             ingredientsData.AddIngredient(i);
-            prettyPrints.SurroundPrintln(" A new ingredient was created: " + i.GetDetails() + " ");
+            prettyPrints.SurroundPrintln(" A new ingredient was created: " + i.GetDetails(ingredientsData.CURRENCY) + " ");
             return i;
         }
     }

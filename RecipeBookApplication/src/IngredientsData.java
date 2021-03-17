@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class IngredientsData {
 
     private TreeMap<String, Ingredient> ingredients;
+    public String CURRENCY = "$";
 
     /* Constructor */
     public IngredientsData() {
@@ -27,7 +28,7 @@ public class IngredientsData {
         ArrayList<String> ingredientStrings = new ArrayList<String>();
 
         for (Map.Entry<String, Ingredient> entry : ingredients.entrySet()) {
-            String s = entry.getValue().GetDetails();
+            String s = entry.getValue().GetDetails(CURRENCY);
             ingredientStrings.add(s);
         }
 

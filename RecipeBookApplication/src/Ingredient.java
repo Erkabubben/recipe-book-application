@@ -8,7 +8,7 @@
  */
 public class Ingredient {
 
-    public static String CURRENCY_SIGN = "$";
+    //public static String CURRENCY_SIGN = "$";
     public String name;
     public double price;
     public String unit;
@@ -23,11 +23,11 @@ public class Ingredient {
     }
 
     /* Returns the details of the ingredient as a string to be displayed to the user */
-    public String GetDetails() {
+    public String GetDetails(String currency) {
         if (divisible) {
-            return name + " ( " + price + CURRENCY_SIGN + " / " + unit + "(s) )";
+            return name + " ( " + currency + price + " / " + unit + "(s) )";
         } else {
-            return name + " ( " + price + CURRENCY_SIGN + " / " + unit + "(s), non-divisible )"; 
+            return name + " ( " + currency + price + " / " + unit + "(s), non-divisible )"; 
         }
     }
 }

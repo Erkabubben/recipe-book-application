@@ -32,9 +32,9 @@ public class Recipe {
     }
 
     /* Returns the whole recipe as a string to be displayed to the user */
-    public String GetRecipeAsString(double portionsAmount, PrettyPrints pp) {
+    public String GetRecipeAsString(double portionsAmount, PrettyPrints pp, String currency) {
         String s = pp.SurroundString(" " + name + " (" + portionsAmount + " portions) ", '¤');
-        s += "\n\n" + pp.SurroundString(" Ingredients (total price: " + GetTotalPrice(portionsAmount) + ") ", '-') + "\n";
+        s += "\n\n" + pp.SurroundString(" Ingredients (total price: " + currency + GetTotalPrice(portionsAmount) + ") ", '-') + "\n";
         s += GetIngredientsListAsString(portionsAmount, pp);
         s += "\n\n" + pp.SurroundString(" Instructions ", '-') + "\n";
         s += GetInstructionsAsString(pp);
@@ -42,8 +42,8 @@ public class Recipe {
         return s;
     }
 
-    public String GetRecipeAsString(PrettyPrints pp) {
-        return GetRecipeAsString(portions, pp);
+    public String GetRecipeAsString(PrettyPrints pp, String currency) {
+        return GetRecipeAsString(portions, pp, currency);
     }
 
     /* Returns the ingredients list as a string to be displayed to the user */

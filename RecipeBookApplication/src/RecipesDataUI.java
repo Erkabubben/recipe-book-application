@@ -78,9 +78,9 @@ public class RecipesDataUI extends UserInterface {
             Recipe recipe = recipesData.GetRecipe(recipeName);
             double portions = validIn.nextDoubleInRange("Enter amount of portions (0 to use recipe default): ", 0.0, 9999999);
             if (portions == 0) {
-                prettyPrints.Println(recipe.GetRecipeAsString(prettyPrints));
+                prettyPrints.Println(recipe.GetRecipeAsString(prettyPrints, ingredientsData.CURRENCY));
             } else {
-                prettyPrints.Println(recipe.GetRecipeAsString(portions, prettyPrints));
+                prettyPrints.Println(recipe.GetRecipeAsString(portions, prettyPrints, ingredientsData.CURRENCY));
             }
         }
     }
