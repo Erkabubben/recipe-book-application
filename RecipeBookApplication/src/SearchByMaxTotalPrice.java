@@ -8,7 +8,7 @@ public class SearchByMaxTotalPrice implements ISearchStrategy {
         validIn = vi;
     }
 
-    public Double RequestSearchParameterFromUser() {
+    private Double RequestSearchParameterFromUser() {
         Double price = validIn.nextDoubleInRange("Enter maximum total price: ", 0, 9999999);
         return price;
     }

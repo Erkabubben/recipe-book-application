@@ -8,7 +8,7 @@ public class SearchByNameBegins implements ISearchStrategy {
         validIn = vi;
     }
 
-    public String RequestSearchParameterFromUser() {
+    private String RequestSearchParameterFromUser() {
         System.out.print("Enter recipe name: ");
         String recipeName = validIn.nextLine();
         return recipeName;

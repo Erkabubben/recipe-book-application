@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class IngredientsDataUI extends UserInterface {
 
     private IngredientsData ingredientsData;
+    private RecipesData recipesData;
 
-    public IngredientsDataUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData) {
+    public IngredientsDataUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
         super(vi, pp);
         ingredientsData = ingrData;
+        recipesData = rcpData;
     }
 
     protected int Main() {
@@ -25,29 +27,26 @@ public class IngredientsDataUI extends UserInterface {
     protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
-                prettyPrints.SurroundPrintln(" INGREDIENTS ");
-                ArrayList<String> ingredients = ingredientsData.GetAllIngredients();
-                for (String string : ingredients) {
-                    System.out.println(string);
-                }
-                prettyPrints.SurroundPrintln("");
+                ListAllIngredients();
                 break;
             case 2:
                 CreateNewIngredient();
                 break;
             case 3:
-                System.out.print("Enter the name of the ingredient you want to delete: ");
-                String ingredient = validIn.next();
-                boolean ingredientWasDeleted = ingredientsData.DeleteIngredient(ingredient);
-                if (ingredientWasDeleted) {
-                    System.out.println("SUCCESS:" + ingredient + " was deleted from the list of available ingredients.");
-                } else {
-                    System.out.println("ERROR:" + ingredient + " could not be found - did you already delete it?");
-                }
+                DeleteIngredient();
                 break;
             default:
                 break;
         }
+    }
+
+    private void ListAllIngredients() {
+        prettyPrints.SurroundPrintln(" INGREDIENTS ");
+        ArrayList<String> ingredients = ingredientsData.GetAllIngredients();
+        for (String string : ingredients) {
+            System.out.println(string);
+        }
+        prettyPrints.SurroundPrintln("");
     }
 
     protected Ingredient CreateNewIngredient() {
@@ -59,12 +58,50 @@ public class IngredientsDataUI extends UserInterface {
         } else {
             double price = validIn.nextDoubleInRange("Price: ", 0, 9999999);
             String unit = validIn.next("Unit: ");
-            Boolean divisible = validIn.YesOrNo("Ingredient can be divided (Y/N): ");
+            Boolean divisible = validIn.YesOrNo("Ingredient can be divided (Y/N) ");
     
             Ingredient i = new Ingredient(name, price, unit, divisible);
             ingredientsData.AddIngredient(i);
             prettyPrints.SurroundPrintln(" A new ingredient was created: " + i.GetDetails() + " ");
             return i;
+        }
+    }
+
+    private void DeleteIngredient() {
+        String ingredientName = validIn.nextLine("Enter the name of the ingredient you want to delete: ");
+        if (ingredientName != null && !ingredientName.isBlank()) {
+            SearchByContainsIngredient search = new SearchByContainsIngredient(validIn);
+            ArrayList<Recipe> recipesContaintingIngredient = search.GetSearchResults(recipesData.GetAllRecipes(), ingredientName);
+            if (recipesContaintingIngredient.size() > 0) {
+                System.out.println(ingredientName + " is listed as an ingredient in the following recipes:\n");
+                for (Recipe recipe : recipesContaintingIngredient) {
+                    prettyPrints.Println("- " + recipe.name);
+                }
+                System.out.println("\nIf you delete the ingredient, it will be automatically deleted from the recipes,");
+                System.out.println("and you may need to update the instructions of each of the recipes.");
+                Boolean proceed = validIn.YesOrNo("Do you want to proceed with deleting the ingredient? (Y/N) ");
+                if (proceed) {
+                    for (Recipe recipe : recipesContaintingIngredient) {
+                        ArrayList<Integer> ingredientListEntries = recipe.FindIngredientsInList(ingredientName);
+                        for (int i = ingredientListEntries.size() - 1; i >= 0; i--) {
+                            recipe.DeleteIngredientFromList(ingredientListEntries.get(i));
+                        }
+                        System.out.println(ingredientName + " was deleted from " + recipe.name + " recipe.");
+                    }
+                    ProceedToDeleteIngredientFromIngredientsData(ingredientName);
+                }
+            } else {
+                ProceedToDeleteIngredientFromIngredientsData(ingredientName);
+            }
+        }
+    }
+
+    private void ProceedToDeleteIngredientFromIngredientsData(String ingredientName) {
+        boolean ingredientWasDeleted = ingredientsData.DeleteIngredient(ingredientName);
+        if (ingredientWasDeleted) {
+            System.out.println("SUCCESS: " + ingredientName + " was deleted from the list of available ingredients.");
+        } else {
+            System.out.println("ERROR: " + ingredientName + " could not be found - did you already delete it?");
         }
     }
 }

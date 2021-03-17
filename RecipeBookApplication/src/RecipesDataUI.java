@@ -77,7 +77,7 @@ public class RecipesDataUI extends UserInterface {
     private void CreateNewRecipe() {
         prettyPrints.SurroundPrintln(" Create New Recipe ", '-');
         Recipe createRecipe = new Recipe("");
-        UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, createRecipe, ingredientsData);
+        UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, createRecipe, ingredientsData, recipesData);
         recipeEditorUI.Enter();
         if (!createRecipe.name.isBlank()) {
             prettyPrints.SurroundPrintln(" A new recipe was added: " + createRecipe.name + " ", '-');
@@ -92,7 +92,7 @@ public class RecipesDataUI extends UserInterface {
         String recipeName = validIn.nextLine();
         Recipe recipe = recipesData.GetRecipe(recipeName);
         if (recipe != null) {
-            UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, recipe, ingredientsData);
+            UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, recipe, ingredientsData, recipesData);
             recipeEditorUI.Enter();
         } else {
             System.out.println("No recipe by name \"" + recipeName + "\" could be found.");

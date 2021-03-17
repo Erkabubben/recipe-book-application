@@ -8,14 +8,19 @@ public class SearchByContainsIngredient implements ISearchStrategy {
         validIn = vi;
     }
 
-    public String RequestSearchParameterFromUser() {
+    private String RequestSearchParameterFromUser() {
         System.out.print("Ingredient to search for: ");
         String ingredient = validIn.nextLine();
         return ingredient;
     }
 
-    public ArrayList<Recipe> GetSearchResults (ArrayList<Recipe> listToSearch) {
-        String searchParam = RequestSearchParameterFromUser();
+    public ArrayList<Recipe> GetSearchResults (ArrayList<Recipe> listToSearch, String ingredientName) {
+        String searchParam;
+        if (ingredientName == null) {
+            searchParam = RequestSearchParameterFromUser();
+        } else {
+            searchParam = ingredientName;
+        }
         ArrayList<Recipe> results = new ArrayList<Recipe>();
         for (Recipe recipe : listToSearch) {
             for (IngredientsListEntry ingredientsListEntry : recipe.ingredients) {
@@ -25,5 +30,9 @@ public class SearchByContainsIngredient implements ISearchStrategy {
             }
         }
         return results;
+    }
+
+    public ArrayList<Recipe> GetSearchResults (ArrayList<Recipe> listToSearch) {
+        return GetSearchResults(listToSearch, null);
     }
 }

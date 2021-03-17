@@ -3,12 +3,14 @@ import java.util.ArrayList;
 public class RecipeEditorUI extends UserInterface {
 
     private IngredientsData ingredientsData;
+    private RecipesData recipesData;
     private Recipe recipe;
 
-    public RecipeEditorUI(ValidateInput vi, PrettyPrints pp, Recipe r, IngredientsData ingrData) {
+    public RecipeEditorUI(ValidateInput vi, PrettyPrints pp, Recipe r, IngredientsData ingrData, RecipesData rcpData) {
         super(vi, pp);
         ingredientsData = ingrData;
         recipe = r;
+        recipesData = rcpData;
     }
 
     protected int Main() {
@@ -98,7 +100,7 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private void CreateNewIngredientAndAddToRecipe() {
-        IngredientsDataUI ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData);
+        IngredientsDataUI ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData, recipesData);
         Ingredient newIngredient = ingredientsDataUI.CreateNewIngredient();
         if (newIngredient != null) {
             IngredientsListEntry ingredientsListEntry = CreateIngredientsListEntry(newIngredient);

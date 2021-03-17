@@ -24,7 +24,7 @@ public class MainUI extends UserInterface {
     protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
-                UserInterface ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData);
+                UserInterface ingredientsDataUI = new IngredientsDataUI(validIn, prettyPrints, ingredientsData, recipesData);
                 ingredientsDataUI.Enter();
                 break;
             case 2:
