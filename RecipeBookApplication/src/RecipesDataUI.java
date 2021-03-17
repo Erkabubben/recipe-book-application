@@ -20,11 +20,10 @@ public class RecipesDataUI extends UserInterface {
         ingredientsData = ingrData;
     }
 
-    protected int Main() {
-        DisplayMenu("RECIPES");
-        return DisplayInputRequest();
-    }
+    /* Returns the title of the UI class */
+    protected String Title() { return "Recipes"; }
 
+    /* Returns a String array containing the different options that will be displayed to the user */
     protected String[] Choices() {
         return new String[]{
             "List All Recipes",
@@ -36,6 +35,7 @@ public class RecipesDataUI extends UserInterface {
         };
     }
 
+    /* Contains a Switch statement that will trigger code based on what menu option the user has selected */
     protected void OnChoice(int choice) {
         switch (choice) {
             case 1:

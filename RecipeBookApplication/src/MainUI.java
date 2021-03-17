@@ -18,10 +18,8 @@ public class MainUI extends UserInterface {
         recipesData = rcpData;
     }
 
-    protected int Main() {
-        DisplayMenu("MAIN MENU");
-        return DisplayInputRequest();
-    }
+    /* Returns the title of the UI class */
+    protected String Title() { return "Main Menu"; }
 
     protected String[] Choices() {
         return new String[]{
@@ -30,6 +28,7 @@ public class MainUI extends UserInterface {
         };
     }
 
+    /* Contains a Switch statement that will trigger code based on what menu option the user has selected */
     protected void OnChoice(int choice) {
         switch (choice) {
             case 1:

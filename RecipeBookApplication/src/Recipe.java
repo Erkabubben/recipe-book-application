@@ -31,21 +31,23 @@ public class Recipe {
         instructions = instr;
     }
 
-    public String GetRecipeAsString(PrettyPrints pp) {
-        return GetRecipeAsString(portions, pp);
-    }
-
+    /* Returns the whole recipe as a string to be displayed to the user */
     public String GetRecipeAsString(double portionsAmount, PrettyPrints pp) {
         String s = pp.SurroundString(" " + name + " (" + portionsAmount + " portions) ", '¤');
         s += "\n\n" + pp.SurroundString(" Ingredients (total price: " + GetTotalPrice(portionsAmount) + ") ", '-') + "\n";
-        s += GetIngredientsAsString(portionsAmount, pp);
+        s += GetIngredientsListAsString(portionsAmount, pp);
         s += "\n\n" + pp.SurroundString(" Instructions ", '-') + "\n";
         s += GetInstructionsAsString(pp);
         s += "\n\n" + pp.SurroundString("", '¤');
         return s;
     }
 
-    public String GetIngredientsAsString(double portionsAmount, PrettyPrints pp) {
+    public String GetRecipeAsString(PrettyPrints pp) {
+        return GetRecipeAsString(portions, pp);
+    }
+
+    /* Returns the ingredients list as a string to be displayed to the user */
+    public String GetIngredientsListAsString(double portionsAmount, PrettyPrints pp) {
         String s = "";
         for (IngredientsListEntry ingredientsListEntry : ingredients) {
             s += "\n" + pp.SurroundString(ingredientsListEntry.GetDetails(portionsAmount / portions), ' ');
@@ -53,6 +55,7 @@ public class Recipe {
         return s;
     }
 
+    /* Returns the instructions list as a string to be displayed to the user */
     public String GetInstructionsAsString(PrettyPrints pp) {
         String s = "";
         int id = 1;
@@ -64,6 +67,7 @@ public class Recipe {
         return s;
     }
 
+    /* Calculates and returns the total price of the ingredients of the recipe, based on the amount of portions */
     public double GetTotalPrice(double portionsAmount) {
         int total = 0;
         for (IngredientsListEntry ingredientsListEntry : ingredients) {
@@ -72,10 +76,13 @@ public class Recipe {
         return total;
     }
 
+    /* Adds a new entry to the ingredients list */
     public void AddIngredientToList (IngredientsListEntry ingredient) {
         ingredients.add(ingredient);
     }
 
+    /* Finds all instances of a specified ingredient in the ingredients list - returns an array
+       with the list entry indexes */
     public ArrayList<Integer> FindIngredientsInList(String ingredientName) {
         ArrayList<Integer> results = new ArrayList<Integer>();
         for (int i = 0; i < ingredients.size(); i++) {
@@ -87,18 +94,21 @@ public class Recipe {
         return results;
     }
 
+    /* Deletes an ingredient list entry */
     public void DeleteIngredientFromList (int index) {
         ingredients.remove(index);
+    }
+
+    /* Adds a string as an instruction to the instructions list */
+    public void AddInstructionLine(String instructionLine, int atLine) {
+        instructions.add(atLine, instructionLine); 
     }
 
     public void AddInstructionLine(String instructionLine) {
         instructions.add(instructionLine); 
     }
 
-    public void AddInstructionLine(String instructionLine, int atLine) {
-        instructions.add(atLine, instructionLine); 
-    }
-
+    /* Deletes the instruction line at the given index */
     public void DeleteInstructionLine(int atLine) {
         instructions.remove(atLine);
     }

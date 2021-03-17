@@ -20,11 +20,10 @@ public class RecipeSearchUI extends UserInterface {
         recipesData = rcpData;
     }
 
-    protected int Main() {
-        DisplayMenu("SEARCH RECIPES");
-        return DisplayInputRequest();
-    }
+    /* Returns the title of the UI class */
+    protected String Title() { return "Search Recipes"; }
 
+    /* Returns a String array containing the different options that will be displayed to the user */
     protected String[] Choices() {
         return new String[]{
             "Name Begins With",
@@ -33,6 +32,7 @@ public class RecipeSearchUI extends UserInterface {
         };
     }
 
+    /* Contains a Switch statement that will trigger code based on what menu option the user has selected */
     protected void OnChoice(int choice) {
         switch (choice) {
             case 1:

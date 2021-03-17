@@ -23,14 +23,22 @@ public class RecipeEditorUI extends UserInterface {
         recipesData = rcpData;
     }
 
-    protected int Main() {
-        if (recipe.name == "") {
+    /* Overrides the Menu method of the parent class to go to CreateNewRecipe if creating a whole
+       new recipe, otherwise displays the Editing Recipe menu */
+    @Override protected int Menu() {
+        if (recipe.name == "") { // If recipe has no name, go directly to CreateNewRecipe
             return CreateNewRecipe();
-        } else {
-            return EditRecipe();
+        } else { // Otherwise, display menu for editing existing recipe
+            System.out.println(recipe.GetRecipeAsString(recipe.portions, prettyPrints) + "\n");
+            DisplayMenuWithTitleAndOptions(Title());
+            return validIn.nextIntInRange("Select an option: ", 1, amountOfChoices());
         }
     }
 
+    /* Returns the title of the UI class */
+    protected String Title() { return "Editing Recipe: " + recipe.name; }
+
+    /* Returns a String array containing the different options that will be displayed to the user */
     protected String[] Choices() {
         return new String[]{
             "Change Recipe Name",
@@ -43,6 +51,7 @@ public class RecipeEditorUI extends UserInterface {
         };
     }
 
+    /* Contains a Switch statement that will trigger code based on what menu option the user has selected */
     protected void OnChoice(int choice) {
         switch (choice) {
             case 1:
@@ -72,7 +81,7 @@ public class RecipeEditorUI extends UserInterface {
     }
 
     private int CreateNewRecipe() {
-        prettyPrints.SurroundPrintln(" CREATE NEW RECIPE ", '=');
+        prettyPrints.SurroundPrintln(" Create New Recipe ", '=');
         EditName();
         if (recipe.name == "") {
             return Choices().length + 1;
@@ -81,14 +90,6 @@ public class RecipeEditorUI extends UserInterface {
         AddIngredients();
         AddInstructions();
         return Choices().length + 1;
-    }
-
-    private int EditRecipe() {
-        prettyPrints.SurroundPrintln(" EDIT RECIPE ", '=');
-        System.out.println(recipe.GetRecipeAsString(recipe.portions, prettyPrints) + "\n");
-        int amountOfChoices = PrintChoices();
-        System.out.println((amountOfChoices + 1) + ". Exit");
-        return validIn.nextIntInRange("\nPlease enter a number: ", 1, amountOfChoices());
     }
 
     private void EditName() {
@@ -124,7 +125,7 @@ public class RecipeEditorUI extends UserInterface {
 
     private void AddIngredients() {
         while (true) {
-            prettyPrints.Println(recipe.GetIngredientsAsString(recipe.portions, prettyPrints));
+            prettyPrints.Println(recipe.GetIngredientsListAsString(recipe.portions, prettyPrints));
             prettyPrints.SurroundPrintln(" ADD INGREDIENT ", '=');
             String ingredientName = validIn.nextLine("Ingredient (leave empty to exit): ");
             if (ingredientName == null || ingredientName.equals("")) {

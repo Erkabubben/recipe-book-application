@@ -19,6 +19,7 @@ public class IngredientsListEntry {
         comment = c;
     }
 
+    /* Returns the details of the IngredientsListEntry as a string to be displayed to the user */
     public String GetDetails(double adjustPortions) {
         double ingredientAmount = (amount * adjustPortions);
         // If ingredient is non-divisible, round to the nearest integer above

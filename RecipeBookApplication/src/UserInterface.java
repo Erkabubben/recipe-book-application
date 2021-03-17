@@ -28,41 +28,52 @@ public abstract class UserInterface {
         int lastChoice = -1;
         while (true) {
             int amountOfChoices = Choices().length;
-            lastChoice = Main();
+            lastChoice = Menu();
             OnChoice(lastChoice);
             if (lastChoice == amountOfChoices + 1) {
                 break;
             }
         }
     }
+
+    /* By default displays the main menu of the UI - can also be overridden for more flexibility. */
+    protected int Menu() {
+        DisplayMenuWithTitleAndOptions(Title());
+        return validIn.nextIntInRange("Select an option: ", 1, amountOfChoices());
+    }
     
-    /* Prints the choices defined in the Choices method along with their ID numbers (1-based index) */
-    protected int PrintChoices() {
+    /* Takes a Choices array and prints its set of options, along with their ID numbers (1-based index).
+       Returns the size of the Choices array. */
+    protected int PrintChoicesArray(String[] choices) {
         int choiceID = 1;
-        for (String string : Choices()) {
+        for (String string : choices) {
             prettyPrints.Println(choiceID + ". " + string);
             choiceID++;
         }
-        return Choices().length;
+        return choices.length;
     }
 
-    protected void DisplayMenu(String title) {
+    /* Displays the title defined in Title() and the contents of the Choices array returned by Choices(),
+       along with the default Exit option */
+    protected void DisplayMenuWithTitleAndOptions(String title) {
         prettyPrints.SurroundPrintln(" " + title + " ", '=');
         System.out.println("");
-        int amountOfChoices = PrintChoices();
+        int amountOfChoices = PrintChoicesArray(Choices());
         prettyPrints.Println((amountOfChoices + 1) + ". Exit");
         prettyPrints.Println("");
     }
 
-    protected int DisplayInputRequest() {
-        return validIn.nextIntInRange("Select an option: ", 1, amountOfChoices());
-    }
-
+    /* Returns the size of the Choices array */
     protected int amountOfChoices() {
         return Choices().length + 1;
     }
 
-    protected abstract int Main();
+    /* Returns the title of the UI class */
+    protected abstract String Title();
+
+    /* Returns a String array containing the different options that will be displayed to the user */
     protected abstract String[] Choices();
+
+    /* Contains a Switch statement that will trigger code based on what menu option the user has selected */
     protected abstract void OnChoice(int choice);
 }
