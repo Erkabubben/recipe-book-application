@@ -1,13 +1,22 @@
+/**
+ * RecipeSearchUI
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ */
 import java.util.ArrayList;
-
+/**
+ * The RecipeSearchUI allows the user to search for recipes based on different search
+ * criteria. The search criteria uses the strategy pattern - when initiating a search,
+ * the user choses a search strategy that implements the interface ISearchStrategy.
+ */
 public class RecipeSearchUI extends UserInterface {
 
-    private IngredientsData ingredientsData;
     private RecipesData recipesData;
 
-    public RecipeSearchUI(ValidateInput vi, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
+    /* Constructor */
+    public RecipeSearchUI(ValidateInput vi, PrettyPrints pp, RecipesData rcpData) {
         super(vi, pp);
-        ingredientsData = ingrData;
         recipesData = rcpData;
     }
 

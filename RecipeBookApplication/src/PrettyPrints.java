@@ -1,3 +1,12 @@
+/**
+ * PrettyPrints
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ * 
+ * PrettyPrints is used to easily create nice-looking text strings and console prints.
+ * The regular print methods println and print can also be called by PrettyPrints.
+ */
 public class PrettyPrints {
 
     public char defaultSurroundChar = '*';

@@ -1,10 +1,19 @@
+/**
+ * RecipesDataUI
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ */
 import java.util.ArrayList;
-
+/**
+ * The RecipesDataUI manages all interaction between the user and the RecipesData.
+ */
 public class RecipesDataUI extends UserInterface {
 
     private RecipesData recipesData;
     private IngredientsData ingredientsData;
 
+    /* Constructor */
     public RecipesDataUI(ValidateInput vi, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
         super(vi, pp);
         recipesData = rcpData;
@@ -100,7 +109,7 @@ public class RecipesDataUI extends UserInterface {
     }
 
     private void Search() {
-        UserInterface recipeSearchUI = new RecipeSearchUI(validIn, prettyPrints, recipesData, ingredientsData);
+        UserInterface recipeSearchUI = new RecipeSearchUI(validIn, prettyPrints, recipesData);
         recipeSearchUI.Enter();
     }
 

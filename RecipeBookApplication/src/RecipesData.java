@@ -1,7 +1,17 @@
+/**
+ * RecipesData
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ */
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-
+/**
+ * The RecipesData class contains all the user's stored recipes. This class
+ * only contains methods for managing the data - all interaction with the user
+ * is managed by its corresponding UI class (RecipesDataUI).
+ */
 public class RecipesData {
 
     private TreeMap<String, Recipe> recipes;
@@ -12,6 +22,7 @@ public class RecipesData {
     private String delimiter2 = "_";
     private String delimiter3 = "@";
 
+    /* Constructor */
     public RecipesData(IngredientsData ingrData) {
         recipes = new TreeMap<String, Recipe>();
         ingredientsData = ingrData;
@@ -19,21 +30,17 @@ public class RecipesData {
 
     public ArrayList<Recipe> GetAllRecipes() {
         ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
-        int id = 1;
         for (Map.Entry<String, Recipe> entry : recipes.entrySet()) {
             recipeList.add(entry.getValue());
-            id++;
         }
         return recipeList;
     }
 
     public ArrayList<String> GetAllRecipeNames() {
         ArrayList<String> recipeStrings = new ArrayList<String>();
-        int id = 1;
         for (Map.Entry<String, Recipe> entry : recipes.entrySet()) {
             String s = entry.getValue().name;
             recipeStrings.add(s);
-            id++;
         }
         return recipeStrings;
     }

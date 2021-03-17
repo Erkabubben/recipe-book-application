@@ -1,14 +1,26 @@
+/**
+ * ValidateInput
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ */
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
+/**
+* ValidateInput provides methods for safely requesting input of different types from the user.
+* It uses try-catch statements to handle exceptions and avoid crashes - when receiving an invalid
+* input, it displays an error message and re-queries the user.
+*/
 public class ValidateInput {
 
     private Scanner in;
 
+    /* Constructor */
     public ValidateInput(Scanner scanner) {
         in = scanner;
     }
 
+    /* Constructor */
     public ValidateInput() {
         in = new Scanner(System.in);
     }

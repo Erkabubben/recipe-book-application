@@ -1,8 +1,17 @@
+/**
+ * MainUI
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ * 
+ * The main menu of the application.
+ */
 public class MainUI extends UserInterface {
 
     private IngredientsData ingredientsData;
     private RecipesData recipesData;
 
+    /* Constructor */
     public MainUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
         super(vi, pp);
         ingredientsData = ingrData;

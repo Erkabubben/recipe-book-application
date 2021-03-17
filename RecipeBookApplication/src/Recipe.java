@@ -1,5 +1,13 @@
+/**
+ * Recipe
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ */
 import java.util.ArrayList;
-
+/**
+ * A recipe for the RecipeBookApplication.
+ */
 public class Recipe {
 
     public String name;
@@ -7,6 +15,7 @@ public class Recipe {
     public ArrayList<IngredientsListEntry> ingredients;
     public ArrayList<String> instructions;
 
+    /* Constructor */
     public Recipe(String n) {
         name = n;
         portions = 0;
@@ -14,6 +23,7 @@ public class Recipe {
         instructions = new ArrayList<String>();
     }
 
+    /* Constructor */
     public Recipe(String n, double p, ArrayList<IngredientsListEntry> ingr, ArrayList<String> instr) {
         name = n;
         portions = p;
@@ -37,10 +47,8 @@ public class Recipe {
 
     public String GetIngredientsAsString(double portionsAmount, PrettyPrints pp) {
         String s = "";
-        int id = 1;
         for (IngredientsListEntry ingredientsListEntry : ingredients) {
             s += "\n" + pp.SurroundString(ingredientsListEntry.GetDetails(portionsAmount / portions), ' ');
-            id++;
         }
         return s;
     }

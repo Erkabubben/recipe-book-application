@@ -1,9 +1,18 @@
+/**
+ * IngredientsListEntry
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ * 
+ * Represents an entry in the ingredients list of a recipe.
+ */
 public class IngredientsListEntry {
 
     public Ingredient ingredient;
     public double amount;
     public String comment;
     
+    /* Constructor */
     public IngredientsListEntry(Ingredient i, double a, String c) {
         ingredient = i;
         amount = a;

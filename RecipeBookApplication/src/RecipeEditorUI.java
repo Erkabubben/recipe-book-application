@@ -1,11 +1,21 @@
+/**
+ * RecipeEditorUI
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ */
 import java.util.ArrayList;
-
+/**
+ * The RecipeEditorUI manages interactions with the user whenever a new
+ * recipe is being created, or when an existing recipe is being edited.
+ */
 public class RecipeEditorUI extends UserInterface {
 
     private IngredientsData ingredientsData;
     private RecipesData recipesData;
     private Recipe recipe;
 
+    /* Constructor */
     public RecipeEditorUI(ValidateInput vi, PrettyPrints pp, Recipe r, IngredientsData ingrData, RecipesData rcpData) {
         super(vi, pp);
         ingredientsData = ingrData;

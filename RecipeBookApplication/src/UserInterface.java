@@ -1,22 +1,29 @@
+/**
+ * UserInterface
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ * 
+ * The UserInterface provides methods for displaying menus and requesting the user
+ * to select an option. By instantiating a class deriving from UserInterface and calling
+ * its Enter method, the logic contained in the Main method of the derived class will be
+ * triggered. Usually, the class will call DisplayMenu, which will display the menu options
+ * defined in the Choices method.
+ * Selecting a menu option will trigger the code contained in the corresponding index in
+ * the OnChoice method's Switch statement.
+ */
 public abstract class UserInterface {
 
     protected ValidateInput validIn;
     protected PrettyPrints prettyPrints;
 
+    /* Constructor */
     public UserInterface(ValidateInput vi, PrettyPrints pp) {
         validIn = vi;
         prettyPrints = pp;
     }
 
-    protected int PrintChoices() {
-        int choiceID = 1;
-        for (String string : Choices()) {
-            prettyPrints.Println(choiceID + ". " + string);
-            choiceID++;
-        }
-        return Choices().length;
-    }
-
+    /* The method to be called to enter the UserInterface.  */
     public void Enter() {
         int lastChoice = -1;
         while (true) {
@@ -27,6 +34,16 @@ public abstract class UserInterface {
                 break;
             }
         }
+    }
+    
+    /* Prints the choices defined in the Choices method along with their ID numbers (1-based index) */
+    protected int PrintChoices() {
+        int choiceID = 1;
+        for (String string : Choices()) {
+            prettyPrints.Println(choiceID + ". " + string);
+            choiceID++;
+        }
+        return Choices().length;
     }
 
     protected void DisplayMenu(String title) {

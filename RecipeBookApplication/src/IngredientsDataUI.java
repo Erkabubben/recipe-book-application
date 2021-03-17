@@ -1,20 +1,32 @@
+/**
+ * IngredientsDataUI
+ * 
+ * @version 1.0 17 Mar 2021
+ * @author Erik Lindholm
+ */
 import java.util.ArrayList;
-
+/**
+ * The IngredientsDataUI manages all interaction between the user and the IngredientsData.
+ */
 public class IngredientsDataUI extends UserInterface {
 
     private IngredientsData ingredientsData;
     private RecipesData recipesData;
 
+    /* Constructor */
     public IngredientsDataUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
         super(vi, pp);
         ingredientsData = ingrData;
         recipesData = rcpData;
     }
 
+    /*  */
     protected int Main() {
         DisplayMenu("INGREDIENTS");
         return DisplayInputRequest();
     }
+
+    protected String Title() { return "INGREDIENTS"; }
 
     protected String[] Choices() {
         return new String[]{
@@ -42,7 +54,7 @@ public class IngredientsDataUI extends UserInterface {
 
     private void ListAllIngredients() {
         prettyPrints.SurroundPrintln(" INGREDIENTS ");
-        ArrayList<String> ingredients = ingredientsData.GetAllIngredients();
+        ArrayList<String> ingredients = ingredientsData.GetListOfAllIngredients();
         for (String string : ingredients) {
             System.out.println(string);
         }
