@@ -10,14 +10,9 @@ import java.util.ArrayList;
  */
 public class RecipesDataUI extends UserInterface {
 
-    private RecipesData recipesData;
-    private IngredientsData ingredientsData;
-
     /* Constructor */
-    public RecipesDataUI(ValidateInput vi, PrettyPrints pp, RecipesData rcpData, IngredientsData ingrData) {
-        super(vi, pp);
-        recipesData = rcpData;
-        ingredientsData = ingrData;
+    public RecipesDataUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
+        super(vi, pp, ingrData, rcpData);
     }
 
     /* Returns the title of the UI class */
@@ -89,7 +84,7 @@ public class RecipesDataUI extends UserInterface {
     private void CreateNewRecipe() {
         prettyPrints.SurroundPrintln(" Create New Recipe ", '-');
         Recipe createRecipe = new Recipe("");
-        UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, createRecipe, ingredientsData, recipesData);
+        UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, ingredientsData, recipesData, createRecipe);
         recipeEditorUI.Enter();
         if (!createRecipe.name.isBlank()) {
             prettyPrints.SurroundPrintln(" A new recipe was added: " + createRecipe.name + " ", '-');
@@ -105,7 +100,7 @@ public class RecipesDataUI extends UserInterface {
         String recipeName = validIn.nextLine();
         Recipe recipe = recipesData.GetRecipe(recipeName);
         if (recipe != null) {
-            UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, recipe, ingredientsData, recipesData);
+            UserInterface recipeEditorUI = new RecipeEditorUI(validIn, prettyPrints, ingredientsData, recipesData, recipe);
             recipeEditorUI.Enter();
         } else {
             System.out.println("No recipe by name \"" + recipeName + "\" could be found.");
@@ -114,7 +109,7 @@ public class RecipesDataUI extends UserInterface {
 
     /* Displays the user interface for making a recipe search - enters the RecipeSearchUI. */
     private void Search() {
-        UserInterface recipeSearchUI = new RecipeSearchUI(validIn, prettyPrints, recipesData);
+        UserInterface recipeSearchUI = new RecipeSearchUI(validIn, prettyPrints, ingredientsData, recipesData);
         recipeSearchUI.Enter();
     }
 

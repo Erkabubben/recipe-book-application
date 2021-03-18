@@ -16,11 +16,15 @@ public abstract class UserInterface {
 
     protected ValidateInput validIn;
     protected PrettyPrints prettyPrints;
+    protected IngredientsData ingredientsData;
+    protected RecipesData recipesData;
 
     /* Constructor */
-    public UserInterface(ValidateInput vi, PrettyPrints pp) {
+    public UserInterface(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
         validIn = vi;
         prettyPrints = pp;
+        ingredientsData = ingrData;
+        recipesData = rcpData;
     }
 
     /* The method to be called to enter the UserInterface.  */
@@ -39,7 +43,7 @@ public abstract class UserInterface {
     /* By default displays the main menu of the UI - can also be overridden for more flexibility. */
     protected int Menu() {
         DisplayMenuWithTitleAndOptions(Title());
-        return validIn.nextIntInRange("Select an option: ", 1, amountOfChoices());
+        return validIn.nextIntInRange("Select an option: ", 1, AmountOfChoices());
     }
     
     /* Takes a Choices array and prints its set of options, along with their ID numbers (1-based index).
@@ -64,7 +68,7 @@ public abstract class UserInterface {
     }
 
     /* Returns the size of the Choices array */
-    protected int amountOfChoices() {
+    protected int AmountOfChoices() {
         return Choices().length + 1;
     }
 

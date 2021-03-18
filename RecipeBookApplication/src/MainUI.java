@@ -8,14 +8,9 @@
  */
 public class MainUI extends UserInterface {
 
-    private IngredientsData ingredientsData;
-    private RecipesData recipesData;
-
     /* Constructor */
     public MainUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
-        super(vi, pp);
-        ingredientsData = ingrData;
-        recipesData = rcpData;
+        super(vi, pp, ingrData, rcpData);
     }
 
     /* Returns the title of the UI class */
@@ -36,7 +31,7 @@ public class MainUI extends UserInterface {
                 ingredientsDataUI.Enter();
                 break;
             case 2: // Displays the user interface for interacting with the RecipesData.
-                UserInterface recipesDataUI = new RecipesDataUI(validIn, prettyPrints, recipesData, ingredientsData);
+                UserInterface recipesDataUI = new RecipesDataUI(validIn, prettyPrints, ingredientsData, recipesData);
                 recipesDataUI.Enter();
                 break;
             default:

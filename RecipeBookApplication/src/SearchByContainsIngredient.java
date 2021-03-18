@@ -8,13 +8,11 @@ import java.util.ArrayList;
 /**
  * Performs a recipe search that returns all recipes containing a certain ingredient.
  */
-public class SearchByContainsIngredient implements ISearchStrategy {
-
-    ValidateInput validIn;
+public class SearchByContainsIngredient extends SearchStrategy {
 
     /* Constructor */
     public SearchByContainsIngredient(ValidateInput vi) {
-        validIn = vi;
+        super(vi);
     }
 
     /* Requests the user to input search parameters */

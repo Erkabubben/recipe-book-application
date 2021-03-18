@@ -9,13 +9,11 @@ import java.util.ArrayList;
  * Performs a recipe search that returns all recipes whose names begin with
  * the given combination of characters.
  */
-public class SearchByNameBegins implements ISearchStrategy {
-
-    ValidateInput validIn;
+public class SearchByNameBegins extends SearchStrategy {
 
     /* Constructor */
     public SearchByNameBegins(ValidateInput vi) {
-        validIn = vi;
+        super(vi);
     }
 
     /* Requests the user to input search parameters */

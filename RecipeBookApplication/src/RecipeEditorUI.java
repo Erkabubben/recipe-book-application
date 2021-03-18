@@ -11,16 +11,12 @@ import java.util.ArrayList;
  */
 public class RecipeEditorUI extends UserInterface {
 
-    private IngredientsData ingredientsData;
-    private RecipesData recipesData;
     private Recipe recipe;
 
     /* Constructor */
-    public RecipeEditorUI(ValidateInput vi, PrettyPrints pp, Recipe r, IngredientsData ingrData, RecipesData rcpData) {
-        super(vi, pp);
-        ingredientsData = ingrData;
+    public RecipeEditorUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData, Recipe r) {
+        super(vi, pp, ingrData, rcpData);
         recipe = r;
-        recipesData = rcpData;
     }
 
     /* Overrides the Menu method of the parent class to go to CreateNewRecipe if creating a whole
@@ -31,7 +27,7 @@ public class RecipeEditorUI extends UserInterface {
         } else { // Otherwise, display menu for editing existing recipe
             System.out.println(recipe.GetRecipeAsString(recipe.portions, prettyPrints, ingredientsData.CURRENCY) + "\n");
             DisplayMenuWithTitleAndOptions(Title());
-            return validIn.nextIntInRange("Select an option: ", 1, amountOfChoices());
+            return validIn.nextIntInRange("Select an option: ", 1, AmountOfChoices());
         }
     }
 

@@ -10,14 +10,9 @@ import java.util.ArrayList;
  */
 public class IngredientsDataUI extends UserInterface {
 
-    private IngredientsData ingredientsData;
-    private RecipesData recipesData;
-
     /* Constructor */
     public IngredientsDataUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
-        super(vi, pp);
-        ingredientsData = ingrData;
-        recipesData = rcpData;
+        super(vi, pp, ingrData, rcpData);
     }
 
     /* Returns the title of the UI class */

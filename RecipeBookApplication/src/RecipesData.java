@@ -127,7 +127,7 @@ public class RecipesData {
     
     /* Performs a search on the recipes collection - returns an ArrayList containing the recipes
        that match the criteria of the given search strategy. */
-    public ArrayList<Recipe> Search(ISearchStrategy searchStrategy, ArrayList<Recipe> recipes) {
+    public ArrayList<Recipe> Search(SearchStrategy searchStrategy, ArrayList<Recipe> recipes) {
         return new ArrayList<Recipe>();
     }
 

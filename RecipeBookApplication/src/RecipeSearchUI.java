@@ -12,12 +12,9 @@ import java.util.ArrayList;
  */
 public class RecipeSearchUI extends UserInterface {
 
-    private RecipesData recipesData;
-
     /* Constructor */
-    public RecipeSearchUI(ValidateInput vi, PrettyPrints pp, RecipesData rcpData) {
-        super(vi, pp);
-        recipesData = rcpData;
+    public RecipeSearchUI(ValidateInput vi, PrettyPrints pp, IngredientsData ingrData, RecipesData rcpData) {
+        super(vi, pp, ingrData, rcpData);
     }
 
     /* Returns the title of the UI class */
@@ -50,7 +47,7 @@ public class RecipeSearchUI extends UserInterface {
     }
 
     /* Displays the user interface of the selected search strategy, then prints the results. */
-    private void DisplaySearchResults(ISearchStrategy searchStrategy) {
+    private void DisplaySearchResults(SearchStrategy searchStrategy) {
         ArrayList<Recipe> results = searchStrategy.GetSearchResults(recipesData.GetAllRecipes());
         if (results.size() > 0) {
             prettyPrints.SurroundPrintln(" Search Results ", '-');
