@@ -1,6 +1,6 @@
 ## The final implementation and updated design
 
-![class diagram](intended.png)
+![class diagram](design.png)
 
 The updated class diagram has twice the amount of classes compared to the first, but at the core of it is still the original design. When I considered letting RecipeBookApplication alone handle all input and output, I really underestimated the amount of code neccessary for this. However, I mentioned in intended.md that I was curious to see if I could find a Strategy pattern solution to the user interface, and pretty much the first thing I did after implementing the most basic functionality was to start experimenting with this.
 
