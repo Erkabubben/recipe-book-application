@@ -64,10 +64,11 @@ public class IngredientsData {
             Ingredient i;
             if (elements.length == 4) {
                 i = new Ingredient(elements[0], Double.parseDouble(elements[1]), elements[2], Boolean.parseBoolean(elements[3]));
-            } else {
+                AddIngredient(i);
+            } else if (elements.length == 3) {
                 i = new Ingredient(elements[0], Double.parseDouble(elements[1]), elements[2], true);
+                AddIngredient(i);
             }
-            AddIngredient(i);
         }
     }
 

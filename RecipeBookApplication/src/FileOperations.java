@@ -23,12 +23,16 @@ public class FileOperations {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    /* Loads a text file at a given path and returns its contents as a string. */
+    /* Loads a text file at a given path and returns its contents as a string.
+       Returns an empty string if file doesn't exist. */
     public String LoadToString(String path) {
         StringBuilder text = new StringBuilder();
 
         try {
             File file = new File(path);
+            if (!file.exists()) {
+                return "";
+            }
             Scanner scan = new Scanner(file);
             while (scan.hasNext()) {
                 String str = scan.nextLine();
